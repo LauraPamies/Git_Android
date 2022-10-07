@@ -351,6 +351,12 @@ public class MainActivity extends AppCompatActivity {
     public void boton_enviar_pulsado (View quien){
 
 
+        Log.d("--","Empieza el boton enviar real hacia logica real");
+        Logica logica = new Logica();
+        logica.enviardatosreal(valorbeaconint);
+
+        Log.d("--","Termina el boton enviar real hacia logica real");
+
     } // ()
 
 } // class
