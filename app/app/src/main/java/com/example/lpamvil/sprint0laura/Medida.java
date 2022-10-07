@@ -5,8 +5,8 @@ public class Medida {
     //Atributos de la clase
     private int valor;
     private String fecha;
-    private long latitud;
-    private long longitud;
+    private double latitud;
+    private double longitud;
 
 
     //Getters y Setters de los atributos
@@ -26,7 +26,7 @@ public class Medida {
         this.fecha = fecha;
     }
 
-    public long getLatitud() {
+    public double getLatitud() {
         return latitud;
     }
 
@@ -34,7 +34,7 @@ public class Medida {
         this.latitud = latitud;
     }
 
-    public long getLongitud() {
+    public double getLongitud() {
         return longitud;
     }
 
@@ -48,7 +48,7 @@ public class Medida {
 
 
     //Constructor con los atributos
-    public Medida(int valor, String fecha, long latitud, long longitud) {
+    public Medida(int valor, String fecha, double latitud, double longitud) {
         this.valor = valor;
         this.fecha = fecha;
         this.latitud = latitud;
