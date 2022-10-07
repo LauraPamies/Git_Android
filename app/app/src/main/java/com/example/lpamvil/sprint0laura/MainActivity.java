@@ -338,6 +338,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void boton_enviar_fake (View quien){
 
+        Log.d("--","Empieza el boton enviar fake hacia logica fake");
+        LogicaFake logicaFake = new LogicaFake();
+        logicaFake.enviardatosfake();
+
+        Log.d("--","Termina el boton enviar fake hacia logica fake");
+
 
 
     } // ()
