@@ -65,7 +65,7 @@ import okhttp3.OkHttpClient;
 public class MainActivity extends AppCompatActivity {
 
 
-    public String valorbeacon = "1";
+    public String valorbeacon = null;
 
     Date fechaactual = new Date();
 
@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
 
         valorbeacon= String.valueOf(Utilidades.bytesToInt(tib.getMajor()));
         textoamostrar.setText(valorbeacon);
+
+        valorbeaconint = Integer.parseInt(valorbeacon);
 
         Log.d(ETIQUETA_LOG, " ----------------------------------------------------");
         Log.d(ETIQUETA_LOG, " prefijo  = " + Utilidades.bytesToHexString(tib.getPrefijo()));
@@ -353,7 +355,11 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("--","Empieza el boton enviar real hacia logica real");
         Logica logica = new Logica();
-        logica.enviardatosreal(valorbeaconint);
+        if (valorbeaconint!=0)
+        {
+            logica.enviardatosreal(valorbeaconint);
+
+        }
 
         Log.d("--","Termina el boton enviar real hacia logica real");
 
