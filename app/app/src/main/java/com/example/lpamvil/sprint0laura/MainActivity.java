@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     Date fechaactual = new Date();
 
+    //prueba
     public int valorbeaconint;
 
 
