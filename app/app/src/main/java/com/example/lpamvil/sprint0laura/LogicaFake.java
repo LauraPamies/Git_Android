@@ -13,9 +13,13 @@ public class LogicaFake {
 
     public void enviardatosfake()
     {
+
+        //Se crea una clase medida donde se insertan los atributos falsos del valor de beacon, fecha, latitud y longitud
+
         Medida medida = new Medida(456,"07-10-2022",76,34);
 
 
+        //Se crea un objeto Json para meter los valores de la medida y posteriormente enviarlos en el post
 
         JSONObject jsonObject = new JSONObject();
 
@@ -32,6 +36,7 @@ public class LogicaFake {
         }
 
 
+        //El método de la api para hacer el post
 
         AndroidNetworking.post("http://192.168.0.14:8080/altaMedicion")
                 .addJSONObjectBody(jsonObject) // posting json

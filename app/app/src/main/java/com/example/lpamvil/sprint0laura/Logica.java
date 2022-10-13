@@ -21,11 +21,12 @@ public class Logica {
     {
 
 
-
+        //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
         Medida medida = new Medida(valorbeacon,fechaactual.toString(),38.99694087643454,-0.1650828343732021);
        
 
 
+        //Se crea un objeto Json para meter los valores de la medida y posteriormente enviarlos en el post
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("id", null); //se envia id null ya que en la base de datos la id es autoincrementable
@@ -39,7 +40,7 @@ public class Logica {
         }
 
 
-
+        //El método de la api para hacer el post
         AndroidNetworking.post("http://192.168.0.14:8080/altaMedicion")
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
