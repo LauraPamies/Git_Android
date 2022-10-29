@@ -6,68 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/botonBuscarDispositivosBTLE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="botonBuscarDispositivosBTLEPulsado"
-        android:text="Buscar Dispositivos BTLE nou 4"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="95dp"
+        android:background="@color/green_basic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/botonDetenerBusquedaDispositivosBTLE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="botonDetenerBusquedaDispositivosBTLEPulsado"
-        android:text="Detener búsaqueda Dispositivos BTLE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonBuscarDispositivosBTLE" />
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65"
+            app:srcCompat="@drawable/ic_baseline_menu_40" />
 
-    <Button
-        android:id="@+id/botonBuscarNuestroDispositivoBTLE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="botonBuscarNuestroDispositivoBTLEPulsado"
-        android:text="Buscar nuestro dispositivo  BTLE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonDetenerBusquedaDispositivosBTLE" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="59dp"
+            android:layout_height="53dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/imageButton2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.68"
+            app:srcCompat="@drawable/icono1" />
 
-    <TextView
-        android:id="@+id/textoamostrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="#00FFFFFF"
+            android:onClick="botonlogin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65"
+            app:srcCompat="@drawable/ic_baseline_login_40" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonfake" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-    <Button
-        android:id="@+id/botonEnviar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#4CAF50"
-        android:onClick="boton_enviar_pulsado"
-        android:text="Enviar Medida Real"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonBuscarNuestroDispositivoBTLE" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="382dp"
+            android:layout_height="225dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut lacus ut neque sollicitudin hendrerit. Praesent dictum accumsan imperdiet. Quisque mollis sem at lectus placerat pellentesque. Proin et elit quis purus venenatis sagittis eget a turpis. Donec ut volutpat odio. Proin non ex laoreet, venenatis lorem eget, sagittis dui. Suspendisse sed leo sit amet ex venenatis porttitor. Aliquam erat volutpat. Nulla efficitur neque sagittis libero mattis, non placerat orci vestibulum. Morbi non tortor non nisi viverra elementum eu non lacus. Etiam iaculis lobortis orci. Vivamus tristique mauris ac erat pretium pretium. Vivamus congue egestas scelerisque. Phasellus tempus gravida arcu, sollicitudin aliquet mauris rutrum a."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/botonfake"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#9C2D2D"
-        android:onClick="boton_enviar_fake"
-        android:text="Enviar Medida Fake"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonEnviar"
-        app:rippleColor="#A5A5A5"
-        app:strokeColor="#FFFFFF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

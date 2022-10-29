@@ -1,5 +1,7 @@
 package com.example.lpamvil.sprint0laura;
 
+import android.util.Log;
+
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
@@ -15,7 +17,7 @@ public class Logica {
 
     Date fechaactual = new Date();
 
-
+    static JSONObject jobject = new JSONObject();
 
     public void enviardatosreal(int valorbeacon)
     {
@@ -59,5 +61,46 @@ public class Logica {
                     }
                 });
 
+    }
+
+
+    public JSONObject login(String usuario,String contrasena)
+    {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("username",usuario);
+            jsonObject.put("password",contrasena);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //El método de la api para hacer el post
+        AndroidNetworking.post("http://192.168.0.14:3000/login")
+                .addJSONObjectBody(jsonObject) // posting json
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // do anything with response
+                        Log.d("RESPUESTALOGIN", "va");
+                        try {
+                            JSONObject object = response.getJSONObject(0);
+                            jobject = object;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.d("RESPUESTALOGIN", error.toString());
+
+                    }
+
+                });
+
+        return jobject;
     }
 }
