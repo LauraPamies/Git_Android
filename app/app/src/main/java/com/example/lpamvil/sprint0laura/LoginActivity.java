@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+        //ha esto habrá que ponerle un if para ir solo si la cuenta está bien
         Intent i = new Intent(LoginActivity.this, UserArea.class);
         startActivity(i);
     }
