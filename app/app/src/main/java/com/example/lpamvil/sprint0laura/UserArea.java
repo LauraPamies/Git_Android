@@ -1,25 +1,43 @@
 package com.example.lpamvil.sprint0laura;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanResult;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class UserArea extends AppCompatActivity {
 
-    /* public String valorbeacon = null;
+    Button botonbluet;
+    TextView textoamostrar;
+
+     public String valorbeacon = null;
 
 
     public int valorbeaconint;
 
 
-    private Button elBotonEnviar;
-
     private EditText valormedicion;
     private EditText valorid;
 
-    TextView textoamostrar;
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     private static final String ETIQUETA_LOG = ">>>>";
@@ -32,6 +50,8 @@ public class UserArea extends AppCompatActivity {
 
     private ScanCallback callbackDelEscaneo = null;
 
+
+    /*
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @SuppressLint("MissingPermission")
@@ -68,10 +88,13 @@ public class UserArea extends AppCompatActivity {
 
     } // ()
 
+     */
+
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @SuppressLint("MissingPermission")
     private void mostrarInformacionDispositivoBTLE(ScanResult resultado ) {
+
 
         BluetoothDevice bluetoothDevice = resultado.getDevice();
         byte[] bytes = resultado.getScanRecord().getBytes();
@@ -82,7 +105,6 @@ public class UserArea extends AppCompatActivity {
         Log.d(ETIQUETA_LOG, " ****************************************************");
         Log.d(ETIQUETA_LOG, " nombre = " + bluetoothDevice.getName());
         Log.d(ETIQUETA_LOG, " toString = " + bluetoothDevice.toString());
-
 
 
         Log.d(ETIQUETA_LOG, " dirección = " + bluetoothDevice.getAddress());
@@ -97,6 +119,9 @@ public class UserArea extends AppCompatActivity {
         textoamostrar.setText(valorbeacon);
 
         valorbeaconint = Integer.parseInt(valorbeacon);
+
+        Logica logica = new Logica();
+        logica.enviardatosreal(valorbeaconint);
 
         Log.d(ETIQUETA_LOG, " ----------------------------------------------------");
         Log.d(ETIQUETA_LOG, " prefijo  = " + Utilidades.bytesToHexString(tib.getPrefijo()));
@@ -175,30 +200,7 @@ public class UserArea extends AppCompatActivity {
 
     } // ()
 
-    // --------------------------------------------------------------
-    // --------------------------------------------------------------
-    public void botonBuscarDispositivosBTLEPulsado( View v ) {
-        Log.d(ETIQUETA_LOG, " boton buscar dispositivos BTLE Pulsado" );
-        this.buscarTodosLosDispositivosBTLE();
-    } // ()
 
-    // --------------------------------------------------------------
-    // --------------------------------------------------------------
-    public void botonBuscarNuestroDispositivoBTLEPulsado( View v ) {
-        Log.d(ETIQUETA_LOG, " boton nuestro dispositivo BTLE Pulsado" );
-        //this.buscarEsteDispositivoBTLE( Utilidades.stringToUUID( "EPSG-GTI-PROY-3A" ) );
-
-        //this.buscarEsteDispositivoBTLE( "EPSG-GTI-PROY-3A" );
-        this.buscarEsteDispositivoBTLE( "Beacon(Laura)" );
-
-    } // ()
-
-    // --------------------------------------------------------------
-    // --------------------------------------------------------------
-    public void botonDetenerBusquedaDispositivosBTLEPulsado( View v ) {
-        Log.d(ETIQUETA_LOG, " boton detener busqueda dispositivos BTLE Pulsado" );
-        this.detenerBusquedaDispositivosBTLE();
-    } // ()
 
     // --------------------------------------------------------------
     // --------------------------------------------------------------
@@ -234,7 +236,7 @@ public class UserArea extends AppCompatActivity {
         )
         {
             ActivityCompat.requestPermissions(
-                    MainActivity.this,
+                    UserArea.this,
                     new String[]{Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.ACCESS_FINE_LOCATION},
                     CODIGO_PETICION_PERMISOS);
         }
@@ -245,26 +247,25 @@ public class UserArea extends AppCompatActivity {
     } // ()
 
 
-*/
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
+        botonbluet = findViewById(R.id.botonbluet);
 
-        /*
         textoamostrar = findViewById(R.id.textoamostrar);
 
-        Log.d(ETIQUETA_LOG, " onCreate(): empieza ");
-
-        inicializarBlueTooth();
+        Log.d("--", " onCreate(): empieza ");
 
 
-        this.elBotonEnviar = (Button) findViewById(R.id.botonEnviar);
 
-        Log.d(ETIQUETA_LOG, " onCreate(): termina ");
-*/
+
+        Log.d("--", " onCreate(): termina ");
+
+
     }
 
     public void logoutbutton(View view)
@@ -278,6 +279,36 @@ public class UserArea extends AppCompatActivity {
         Intent i = new Intent(UserArea.this, EditUserActivity.class);
         startActivity(i);
     }
+
+
+    public void botonbluetpulsado(View view)
+    {
+        String textoboton = botonbluet.getText().toString();
+
+        if (textoboton.equals("Conectar")) //CUANDO ESTAMOS DESCONECTADOS Y QUEREMOS CONECTARNOS
+        {
+            Log.d("BOTON","boton conectar pulsado");
+            botonbluet.setText("Desconectar");
+
+            inicializarBlueTooth();
+            this.buscarEsteDispositivoBTLE( "LE-Bose AE2 SoundLink" );
+            //this.buscarTodosLosDispositivosBTLE();
+
+
+
+        }else { //CUANDO ESTAMOS CONECTADOS Y QUEREMOS DESCONECTARNOS
+            Log.d("BOTON","boton desconectar pulsado");
+            botonbluet.setText("Conectar");
+
+            this.detenerBusquedaDispositivosBTLE();
+
+
+        }
+
+    }
+
+
+
 
 
 /*
