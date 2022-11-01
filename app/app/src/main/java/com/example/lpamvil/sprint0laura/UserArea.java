@@ -157,9 +157,19 @@ public class UserArea extends AppCompatActivity {
             @Override
             public void onScanResult( int callbackType, ScanResult resultado ) {
                 super.onScanResult(callbackType, resultado);
-                Log.d(ETIQUETA_LOG, "  buscarEsteDispositivoBTLE(): onScanResult() ");
 
-                mostrarInformacionDispositivoBTLE( resultado );
+                BluetoothDevice bluetoothDevice2 = resultado.getDevice();
+
+                Log.d(ETIQUETA_LOG, "  buscarEsteDispositivoBTLE(): onScanResult() ");
+                Log.d(ETIQUETA_LOG, " dispositivo detectado = " + bluetoothDevice2.getName());
+                if(bluetoothDevice2.getName() != null && bluetoothDevice2.getName().equals("GTI-3A")){
+                    mostrarInformacionDispositivoBTLE( resultado );
+                } else{
+                    Log.d(ETIQUETA_LOG, "No se ha encontrado el dispositivo");
+                    //Notificaciones.createNotificationChannel();
+                    //Notificaciones.createNotification();
+                }
+
             }
 
             @Override
@@ -291,7 +301,7 @@ public class UserArea extends AppCompatActivity {
             botonbluet.setText("Desconectar");
 
             inicializarBlueTooth();
-            this.buscarEsteDispositivoBTLE( "LE-Bose AE2 SoundLink" );
+            this.buscarEsteDispositivoBTLE("GTI-3A");
             //this.buscarTodosLosDispositivosBTLE();
 
 
@@ -306,6 +316,8 @@ public class UserArea extends AppCompatActivity {
         }
 
     }
+
+
 
 
 
