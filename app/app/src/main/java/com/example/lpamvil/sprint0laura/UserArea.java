@@ -2,10 +2,16 @@ package com.example.lpamvil.sprint0laura;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.BluetoothLeScanner;
@@ -14,6 +20,8 @@ import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanResult;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +33,11 @@ import android.widget.Toast;
 import java.util.List;
 
 public class UserArea extends AppCompatActivity {
+    // Variables related to notifications
+    private final static String CHANNEL_ID = "NOTIFICACION";
+    private final static int NOTIFICACION_ID = 0;
+    // It allows to prevent the notification from being created more than once when it's already created
+    boolean notificacion_unica = false;
 
     Button botonbluet;
     TextView textoamostrar;
@@ -164,10 +177,16 @@ public class UserArea extends AppCompatActivity {
                 Log.d(ETIQUETA_LOG, " dispositivo detectado = " + bluetoothDevice2.getName());
                 if(bluetoothDevice2.getName() != null && bluetoothDevice2.getName().equals("GTI-3A")){
                     mostrarInformacionDispositivoBTLE( resultado );
+                    notificacion_unica = false;
                 } else{
-                    Log.d(ETIQUETA_LOG, "No se ha encontrado el dispositivo");
-                    //Notificaciones.createNotificationChannel();
-                    //Notificaciones.createNotification();
+                    if(notificacion_unica == false){
+                        Log.d(ETIQUETA_LOG, "No se ha encontrado el dispositivo");
+                        createNotificationChannel();
+                        createNotification();
+                        notificacion_unica = true;
+                    }
+
+
                 }
 
             }
@@ -255,11 +274,7 @@ public class UserArea extends AppCompatActivity {
 
         }
     } // ()
-
-
-
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -269,12 +284,7 @@ public class UserArea extends AppCompatActivity {
         textoamostrar = findViewById(R.id.textoamostrar);
 
         Log.d("--", " onCreate(): empieza ");
-
-
-
-
         Log.d("--", " onCreate(): termina ");
-
 
     }
 
@@ -311,13 +321,52 @@ public class UserArea extends AppCompatActivity {
             botonbluet.setText("Conectar");
 
             this.detenerBusquedaDispositivosBTLE();
+            notificacion_unica = false;
 
 
         }
 
     }
 
+    //-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------
+    /*
+     * Configures the notification channel
+     * createNotificationChannel()
+     *
+     *
+     */
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "Noticacion";
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
 
+    //-----------------------------------------------------------------------
+    //-----------------------------------------------------------------------
+    /*
+     * Configures the notification parameters
+     * createNotification()
+     *
+     *
+     */
+    private void createNotification(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.icono1);
+        builder.setContentTitle("Pollution Tracker");
+        builder.setContentText("Desconexion del nodo");
+        builder.setColor(Color.GREEN);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setLights(Color.MAGENTA, 1000, 1000);
+        builder.setVibrate(new long[]{1000,1000,1000,1000,1000});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
+    }
 
 
 
