@@ -22,7 +22,7 @@ public class Logica {
     public void enviardatosreal(int valorbeacon)
     {
 
-
+//pueba comentario
         //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
         Medida medida = new Medida(valorbeacon,fechaactual.toString(),38.99694087643454,-0.1650828343732021);
        

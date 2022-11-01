@@ -70,7 +70,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:background="@drawable/boton_redondo"
+<<<<<<< HEAD
         android:onClick="botonbluetpulsado"
+=======
+        android:fontFamily="@font/quicksandmedium"
+>>>>>>> ac28af64fd6177e8ce907d6d4eda7a4d428ef98a
         android:text="Conectar"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textoamostrar"
@@ -81,6 +85,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksandmedium"
         android:text="No estás conectado con el dispositivo"
         app:layout_constraintBottom_toTopOf="@+id/botonbluet"
         app:layout_constraintEnd_toEndOf="parent"
