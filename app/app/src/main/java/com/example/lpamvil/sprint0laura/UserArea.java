@@ -121,7 +121,7 @@ public class UserArea extends AppCompatActivity {
         valorbeaconint = Integer.parseInt(valorbeacon);
 
         Logica logica = new Logica();
-        logica.enviardatosreal(valorbeaconint);
+        //logica.enviardatosreal(valorbeaconint);
 
         Log.d(ETIQUETA_LOG, " ----------------------------------------------------");
         Log.d(ETIQUETA_LOG, " prefijo  = " + Utilidades.bytesToHexString(tib.getPrefijo()));
