@@ -39,7 +39,7 @@ public class LogicaFake {
 
         //El método de la api para hacer el post
 
-        AndroidNetworking.post("http://192.168.0.14:8080/altaMedicion")
+        AndroidNetworking.post("http://192.168.1.131:8080/altaMedicion")//192.168.1.131
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
