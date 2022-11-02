@@ -279,7 +279,7 @@ public class UserArea extends AppCompatActivity {
         cajaBienvenido = (TextView)findViewById(R.id.nombreUsarioActivity);
         //String usuarioNombre = ("Carmelo");
         String datosUsuariosString = datosUsuario.getString("pasarDato");
-        cajaBienvenido.setText("¡Bienvenido "+datosUsuario+"!");
+        cajaBienvenido.setText("¡Bienvenido "+datosUsuariosString+"!");
 
 
 
