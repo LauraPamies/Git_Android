@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class LogicaFake {
 
 
-    public void enviardatosfake()
+    public void enviardatoidMedicionfake()
     {
 
         //Se crea una clase medida donde se insertan los atributos falsos del valor de beacon, fecha, latitud y longitud

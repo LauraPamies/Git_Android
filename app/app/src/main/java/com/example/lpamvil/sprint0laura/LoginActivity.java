@@ -20,10 +20,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText user, pass;
-
+    JSONObject object;
+    //Usuario usuario = new Usuario();
+    String nombreUs = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +38,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void botonentrar(View view) {
+    public void botonentrar(View view) throws JSONException {
         String u = user.getText().toString();
         String p = pass.getText().toString();
+        //Toast.makeText(this, p, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, u, Toast.LENGTH_LONG).show();
+
+
         if (u.equals("") && p.equals("")) {
             Toast.makeText(this, "ERROR: Campos vacíos", Toast.LENGTH_LONG).show();
         } else if (u.equals("")) {
@@ -46,24 +53,53 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "ERROR: Campo contraseña vacío", Toast.LENGTH_LONG).show();
         } else {
 
-            Log.d("RESPUESTALOGIN", "entra al login");
+            Log.d("RESPUESTALOGIN ", "entra al login");
 
             Logica logica = new Logica();
-            JSONObject object = logica.login(u,p);
+            object = logica.login(u,p);//lo metemos en una varieable global y llamamos a la funcion login
+            //nombreUs = object.getString("nombre");
+
+
 
             Toast.makeText(this, object.toString(), Toast.LENGTH_LONG).show();
 
             try {
-                Log.d("RESPUESTALOGIN", object.getString("nombre"));
+                Log.d("RESPUESTALOGIN ", object.getString("nombre"));
+                nombreUs = object.getString("nombre");
+                //usuario.setNombre(object.getString("nombre"));
+                //Toast.makeText(this, "RESPUESTAUSUARIOusuariogetNombre" + usuario.getNombre(), Toast.LENGTH_LONG).show();ç
+                //Usuario usuario = new Usuario();
+                //usuario.setNombre(object.getString("nombre"));
+
+                //Toast.makeText(this, "RESPUESTA usuario.getNombre " + usuario.getNombre(), Toast.LENGTH_LONG).show();
+
+                Toast.makeText(this, "RESPUESTAUSUARInombreUs" + nombreUs, Toast.LENGTH_LONG).show();
+
+                if(object.toString()!= null){
+                    Intent i = new Intent(LoginActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                    i.putExtra("pasarDato", nombreUs);
+                    //                    i.putExtra("pasarDato", nombreUs);
+                    startActivity(i);
+                }
+
             } catch (JSONException e) {
+
                 e.printStackTrace();
+                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
+
             }
+
+
+
 
 
         }
 
+        //if(la conexion es = 1 entocnes)----------------------------------------------------------------------------------------------------------------
         //ha esto habrá que ponerle un if para ir solo si la cuenta está bien
-        Intent i = new Intent(LoginActivity.this, UserArea.class);
-        startActivity(i);
+
+
     }
+
+
 }

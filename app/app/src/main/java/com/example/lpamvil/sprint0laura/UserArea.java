@@ -1,6 +1,7 @@
 package com.example.lpamvil.sprint0laura;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.arch.core.internal.SafeIterableMap;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -22,13 +23,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class UserArea extends AppCompatActivity {
-
+    JSONObject object2;
     Button botonbluet;
     TextView textoamostrar;
-
+    TextView cajaBienvenido;
+    String nombreUs;
+    Bundle datosUsuario;
      public String valorbeacon = null;
 
 
@@ -263,16 +270,29 @@ public class UserArea extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_user_area);
         botonbluet = findViewById(R.id.botonbluet);
 
+        //Utilidades.bytesToInt(tib.getMajor())
+        datosUsuario = getIntent().getExtras();
+        cajaBienvenido = (TextView)findViewById(R.id.nombreUsarioActivity);
+        //String usuarioNombre = ("Carmelo");
+        String datosUsuariosString = datosUsuario.getString("pasarDato");
+        cajaBienvenido.setText("¡Bienvenido "+datosUsuario+"!");
+
+
+
+/*      nombreUsario= String.valueOf(object.getString("nombre"));
+        nombreUsario.setText(String.valueOf(object.getString("nombre")));
+        nombreUsario = findViewById(R.id.nombreUsarioActivity);*/
+
+
         textoamostrar = findViewById(R.id.textoamostrar);
 
+        Toast.makeText(this, "RESPUESTAUSUARIOnombreUs2 "+nombreUs, Toast.LENGTH_LONG).show();
+
         Log.d("--", " onCreate(): empieza ");
-
-
-
-
         Log.d("--", " onCreate(): termina ");
 
 
