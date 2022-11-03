@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText user, pass;
     String nombreUs = "";
+    String usuarioNom = "";
+
     JSONObject object;
 
 
@@ -56,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Logica logica = new Logica();
             object = logica.login(u,p);//lo metemos en una varieable global y llamamos a la funcion login
+
             //nombreUs = object.getString("nombre");
 
 
@@ -65,6 +68,9 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 Log.d("RESPUESTALOGIN ", object.getString("nombre"));
                 nombreUs = object.getString("nombre");
+                usuarioNom = object.getString("usuario");
+
+
                 //usuario.setNombre(object.getString("nombre"));
                 //Toast.makeText(this, "RESPUESTAUSUARIOusuariogetNombre" + usuario.getNombre(), Toast.LENGTH_LONG).show();ç
                 //Usuario usuario = new Usuario();
@@ -77,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                 if(object.toString()!= null){
                     Intent i = new Intent(LoginActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     i.putExtra("pasarDato", nombreUs);
+                    i.putExtra("pasarDato2", usuarioNom);
+
                     //                    i.putExtra("pasarDato", nombreUs);
                     startActivity(i);
                 }

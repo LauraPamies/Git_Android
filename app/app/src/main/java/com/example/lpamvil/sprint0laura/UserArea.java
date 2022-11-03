@@ -42,6 +42,8 @@ public class UserArea extends AppCompatActivity {
     Button botonbluet;
     TextView textoamostrar;
     Bundle datosUsuario;
+    Bundle datosUsuario2;
+
     TextView cajaBienvenido;
 
      public String valorbeacon = null;
@@ -285,8 +287,12 @@ public class UserArea extends AppCompatActivity {
 
 
         datosUsuario = getIntent().getExtras();
+        datosUsuario2 = getIntent().getExtras();
+
         cajaBienvenido = (TextView)findViewById(R.id.nombreUsarioActivity);
         String datosUsuariosString = datosUsuario.getString("pasarDato");
+        String datosUsuariosString2 = datosUsuario2.getString("pasarDato2");
+
         cajaBienvenido.setText("¡Bienvenido "+datosUsuariosString+"!");
 
 

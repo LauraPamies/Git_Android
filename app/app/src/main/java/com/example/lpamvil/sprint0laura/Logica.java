@@ -109,6 +109,7 @@ public class Logica {
 
     public JSONObject editPerfil(String usuario,String nombre, String mail, String telefono)
     {
+        Log.d("HAENTRADO", "HA ENTRADO");
         JSONObject jsonObject = new JSONObject();
         try{
             jsonObject.put("usuario",usuario);

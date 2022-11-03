@@ -18,17 +18,18 @@ public class EditUserActivity extends AppCompatActivity {
     String usuario, nombre,mail, telefono;
     JSONObject object2;
     //Bundle datosUsuario;
+    String nombreUs2 = "";
 
 
 
 
-    //String datosUsuariosString = datosUsuario.getString("pasarDato");
+    //String datosUsuariosString = datosUsuario.getString("pasarDato2");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-      //  datosUsuario = getIntent().getExtras();
+      //datosUsuario = getIntent().getExtras();
 
         //AL ENTRAR EN ESTA PANTALLA DEBEN APARECER LOS DATOS DEL USUARIO DESDE LA BBDD EN LOS TEXTOS DEL EDIT TEXT PARA ASI PODER MODIFICAR SABIENDO LA INFORMACIÓN ANTERIOR
 
@@ -43,20 +44,29 @@ public class EditUserActivity extends AppCompatActivity {
 
     public void botonguardar(View view)throws JSONException
     {
+        /*
+         usuario = "eustaquio";
         //usuario = datosUsuariosString;
-        //nombre = editnombre.getText().toString();
-        //mail = editmail.getText().toString();
-        //telefono = edittelefono.getText().toString();
+        nombre = editnombre.getText().toString();
+        mail = editmail.getText().toString();
+        telefono = edittelefono.getText().toString();
+        */
+        usuario = "eustaquio";
+        nombreUs2 = editnombre.getText().toString();
 
+
+        /*
         usuario = "eustaquio";
         nombre = "alvero";
         mail = "alvaro@gmail.com";
-        telefono = "33333333333";
+        telefono = "888888888";
+        */
+
         //Log.d("RESPUESTAEDIT", "datosUsuariosString"+ datosUsuariosString);
 
 
         Logica logica = new Logica();
-        object2 = logica.editPerfil(usuario,nombre,mail,telefono);
+        object2 = logica.editPerfil(usuario,editnombre.getText().toString(),editmail.getText().toString(),edittelefono.getText().toString());
         Toast.makeText(this, "EDITttPARTE"+object2.toString(), Toast.LENGTH_LONG).show();
 
 
@@ -73,8 +83,10 @@ public class EditUserActivity extends AppCompatActivity {
 
         if(object2.toString()!= null){
             Intent i = new Intent(EditUserActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-          //  i.putExtra("pasarDato", nombreUs);
-            //                    i.putExtra("pasarDato", nombreUs);
+          //i.putExtra("pasarDato", nombreUs);
+            // i.putExtra("pasarDato", nombreUs);
+            i.putExtra("pasarDato", nombreUs2);
+
             startActivity(i);
         }
 
