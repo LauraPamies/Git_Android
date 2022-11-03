@@ -300,8 +300,15 @@ public class UserArea extends AppCompatActivity {
 
     public void logoutbutton(View view)
     {
-        Intent i = new Intent(UserArea.this, MainActivity.class);
-        startActivity(i);
+        startActivity(new Intent(getBaseContext(), MainActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+        finish();
+
+        //Intent i = new Intent(this, Logout.class);
+       // startActivity(i);
+
+
+
     }
 
     public void edituserbutton(View view)
