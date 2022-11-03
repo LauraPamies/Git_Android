@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         AndroidNetworking.initialize(getApplicationContext());
         user = (EditText) findViewById(R.id.edittextuser);
         pass = (EditText) findViewById(R.id.edittextpass);
+        Logica logica = new Logica();
 
     }
 
@@ -57,13 +58,14 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("RESPUESTALOGIN ", "entra al login");
 
             Logica logica = new Logica();
+
             object = logica.login(u,p);//lo metemos en una varieable global y llamamos a la funcion login
 
             //nombreUs = object.getString("nombre");
 
 
 
-            Toast.makeText(this, object.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "RESPUESTALOGIN1 "+ object.toString(), Toast.LENGTH_LONG).show();
 
             try {
                 Log.d("RESPUESTALOGIN ", object.getString("nombre"));
@@ -87,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     //                    i.putExtra("pasarDato", nombreUs);
                     startActivity(i);
+                    finish();
                 }
 
             } catch (JSONException e) {

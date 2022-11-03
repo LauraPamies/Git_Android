@@ -40,7 +40,7 @@ public class UserArea extends AppCompatActivity {
     boolean notificacion_unica = false;
 
     Button botonbluet;
-    TextView textoamostrar;
+    //TextView textoamostrar;
     Bundle datosUsuario;
     Bundle datosUsuario2;
 
@@ -133,7 +133,7 @@ public class UserArea extends AppCompatActivity {
         TramaIBeacon tib = new TramaIBeacon(bytes);
 
         valorbeacon= String.valueOf(Utilidades.bytesToInt(tib.getMajor()));
-        textoamostrar.setText(valorbeacon);
+        //textoamostrar.setText(valorbeacon);
 
         valorbeaconint = Integer.parseInt(valorbeacon);
 
@@ -297,7 +297,7 @@ public class UserArea extends AppCompatActivity {
 
 
 
-        textoamostrar = findViewById(R.id.textoamostrar);
+        //textoamostrar = findViewById(R.id.textoamostrar);
 
         Log.d("--", " onCreate(): empieza ");
         Log.d("--", " onCreate(): termina ");
@@ -308,6 +308,7 @@ public class UserArea extends AppCompatActivity {
     {
         Intent i = new Intent(UserArea.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 
     public void edituserbutton(View view)

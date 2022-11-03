@@ -68,14 +68,15 @@
         android:id="@+id/botonbluet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="144dp"
         android:background="@drawable/boton_redondo"
-        android:onClick="botonbluetpulsado"
         android:fontFamily="@font/quicksandmedium"
+        android:onClick="botonbluetpulsado"
         android:text="Conectar"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/textoamostrar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -88,17 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.69" />
-
-    <TextView
-        android:id="@+id/textoamostrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintVertical_bias="0.544" />
 
     <TextView
         android:id="@+id/nombreUsarioActivity"

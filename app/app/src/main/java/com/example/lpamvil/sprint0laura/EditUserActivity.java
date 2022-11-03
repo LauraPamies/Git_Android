@@ -15,7 +15,9 @@ import org.json.JSONObject;
 public class EditUserActivity extends AppCompatActivity {
 
     EditText editnombre, editmail,edittelefono;
+
     String usuario, nombre,mail, telefono;
+
     JSONObject object2;
     //Bundle datosUsuario;
     String nombreUs2 = "";
@@ -29,7 +31,7 @@ public class EditUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-      //datosUsuario = getIntent().getExtras();
+        //datosUsuario = getIntent().getExtras();
 
         //AL ENTRAR EN ESTA PANTALLA DEBEN APARECER LOS DATOS DEL USUARIO DESDE LA BBDD EN LOS TEXTOS DEL EDIT TEXT PARA ASI PODER MODIFICAR SABIENDO LA INFORMACIÓN ANTERIOR
 
@@ -46,12 +48,13 @@ public class EditUserActivity extends AppCompatActivity {
     {
         /*
          usuario = "eustaquio";
-        //usuario = datosUsuariosString;
         nombre = editnombre.getText().toString();
         mail = editmail.getText().toString();
         telefono = edittelefono.getText().toString();
         */
-        usuario = "eustaquio";
+        //usuario = datosUsuario.getString("pasarDato2");
+
+        // = "eustaquio";
         nombreUs2 = editnombre.getText().toString();
 
 
