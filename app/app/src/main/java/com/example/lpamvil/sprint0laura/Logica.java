@@ -43,7 +43,7 @@ public class Logica {
 
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://172.20.10.2:8080/altaMedicion")
+        AndroidNetworking.post("http://192.168.1.131:8080/altaMedicion")
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -75,7 +75,7 @@ public class Logica {
         }
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://172.20.10.2:3000/login") //Poner aqui IP propia para enviar al servidor en local
+        AndroidNetworking.post("http://192.168.1.131:3000/login") //Poner aqui IP propia para enviar al servidor en local
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -88,9 +88,11 @@ public class Logica {
                         try {
                             JSONObject object = response.getJSONObject(0);
                             jobject = object;
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                     @Override
                     public void onError(ANError error) {
@@ -117,7 +119,7 @@ public class Logica {
         }
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://172.20.10.2:3000/login") //Poner aqui IP propia para enviar al servidor en local
+        AndroidNetworking.post("http://192.168.1.131:3000/login") //Poner aqui IP propia para enviar al servidor en local
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
