@@ -103,4 +103,47 @@ public class Logica {
 
         return jobject;
     }
+
+    public JSONObject editPerfil(String usuario,String nombre, String mail, String telefono)
+    {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("user",usuario);
+            jsonObject.put("name",nombre);
+            jsonObject.put("email",mail);
+            jsonObject.put("phone",telefono);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //El método de la api para hacer el post
+        AndroidNetworking.post("http://192.168.1.131:3000/update_profile") //Poner aqui IP propia para enviar al servidor en local
+                .addJSONObjectBody(jsonObject) // posting json
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // do anything with response
+                        Log.d("RESPUESTAEDIT", "va editar");
+                        try {
+                            JSONObject object = response.getJSONObject(0);
+                            jobject = object;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.d("RESPUESTAEDIT", error.toString());
+
+                    }
+
+                });
+
+        return jobject;
+    }
 }
