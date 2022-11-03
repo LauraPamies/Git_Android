@@ -17,18 +17,18 @@ public class EditUserActivity extends AppCompatActivity {
     EditText editnombre, editmail,edittelefono;
     String usuario, nombre,mail, telefono;
     JSONObject object2;
-    Bundle datosUsuario;
+    //Bundle datosUsuario;
 
 
 
 
-    String datosUsuariosString = datosUsuario.getString("pasarDato");
+    //String datosUsuariosString = datosUsuario.getString("pasarDato");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-        datosUsuario = getIntent().getExtras();
+      //  datosUsuario = getIntent().getExtras();
 
         //AL ENTRAR EN ESTA PANTALLA DEBEN APARECER LOS DATOS DEL USUARIO DESDE LA BBDD EN LOS TEXTOS DEL EDIT TEXT PARA ASI PODER MODIFICAR SABIENDO LA INFORMACIÓN ANTERIOR
 
@@ -52,7 +52,7 @@ public class EditUserActivity extends AppCompatActivity {
         nombre = "alvero";
         mail = "alvaro@gmail.com";
         telefono = "33333333333";
-        Log.d("RESPUESTAEDIT", "datosUsuariosString"+ datosUsuariosString);
+        //Log.d("RESPUESTAEDIT", "datosUsuariosString"+ datosUsuariosString);
 
 
         Logica logica = new Logica();

@@ -19,6 +19,9 @@ public class Logica {
 
     static JSONObject jobject = new JSONObject();
 
+    static JSONObject jobject2 = new JSONObject();
+
+
     public void enviardatosreal(int valorbeacon)
     {
 
@@ -108,10 +111,10 @@ public class Logica {
     {
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject.put("user",usuario);
-            jsonObject.put("name",nombre);
-            jsonObject.put("email",mail);
-            jsonObject.put("phone",telefono);
+            jsonObject.put("usuario",usuario);
+            jsonObject.put("nombre",nombre);
+            jsonObject.put("mail",mail);
+            jsonObject.put("telefono",telefono);
 
         } catch (JSONException e) {
             e.printStackTrace();
