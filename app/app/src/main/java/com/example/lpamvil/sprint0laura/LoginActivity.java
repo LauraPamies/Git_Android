@@ -39,14 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         Logica logica = new Logica();
 
     }
-
+    //---------------------------------------------------------------------------------------
+    //(View view)----->botonentrar()
+    //---------------------------------------------------------------------------------------
     public void botonentrar(View view) throws JSONException {
         String u = user.getText().toString();
         String p = pass.getText().toString();
-        //Toast.makeText(this, p, Toast.LENGTH_LONG).show();
-        //Toast.makeText(this, u, Toast.LENGTH_LONG).show();
 
 
+        //comprobamos si las casillas estan vacias
         if (u.equals("") && p.equals("")) {
             Toast.makeText(this, "ERROR: Campos vacíos", Toast.LENGTH_LONG).show();
         } else if (u.equals("")) {
@@ -54,18 +55,15 @@ public class LoginActivity extends AppCompatActivity {
         } else if (p.equals("")) {
             Toast.makeText(this, "ERROR: Campo contraseña vacío", Toast.LENGTH_LONG).show();
         } else {
-
+            //intetnamos hacer llamar a la logica y llamar a login
             Log.d("RESPUESTALOGIN ", "entra al login");
 
             Logica logica = new Logica();
 
             object = logica.login(u,p);//lo metemos en una varieable global y llamamos a la funcion login
 
-            //nombreUs = object.getString("nombre");
 
 
-
-            Toast.makeText(this, "RESPUESTALOGIN1 "+ object.toString(), Toast.LENGTH_LONG).show();
 
             try {
                 Log.d("RESPUESTALOGIN ", object.getString("nombre"));
@@ -73,21 +71,14 @@ public class LoginActivity extends AppCompatActivity {
                 usuarioNom = object.getString("usuario");
 
 
-                //usuario.setNombre(object.getString("nombre"));
-                //Toast.makeText(this, "RESPUESTAUSUARIOusuariogetNombre" + usuario.getNombre(), Toast.LENGTH_LONG).show();ç
-                //Usuario usuario = new Usuario();
-                //usuario.setNombre(object.getString("nombre"));
-
-                //Toast.makeText(this, "RESPUESTA usuario.getNombre " + usuario.getNombre(), Toast.LENGTH_LONG).show();
-
-                Toast.makeText(this, "RESPUESTAUSUARInombreUs" + nombreUs, Toast.LENGTH_LONG).show();
-
+                //si el objeto que ha devuelto la lógica no esta vacio, significa que esta en la
+                // bbdd el usuario
                 if(object.toString()!= null){
+
                     Intent i = new Intent(LoginActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     i.putExtra("pasarDato", nombreUs);
                     i.putExtra("pasarDato2", usuarioNom);
 
-                    //                    i.putExtra("pasarDato", nombreUs);
                     startActivity(i);
                     finish();
                 }
@@ -95,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
             } catch (JSONException e) {
 
                 e.printStackTrace();
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
 
             }
 
@@ -105,8 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
-        //if(la conexion es = 1 entocnes)----------------------------------------------------------------------------------------------------------------
-        //ha esto habrá que ponerle un if para ir solo si la cuenta está bien
+
 
 
     }

@@ -66,7 +66,9 @@ public class Logica {
 
     }
 
-
+    //---------------------------------------------------------------------------------------
+    //(String usuario,String contrasena)----->login()----->String usuario,String nombre, String mail, String telefono
+    //---------------------------------------------------------------------------------------
     public JSONObject login(String usuario,String contrasena)
     {
         JSONObject jsonObject = new JSONObject();
@@ -106,7 +108,9 @@ public class Logica {
 
         return jobject;
     }
-
+    //---------------------------------------------------------------------------------------
+    //(String usuario,String nombre, String mail, String telefono)----->editPerfil()----->String usuario,String nombre, String mail, String telefono
+    //---------------------------------------------------------------------------------------
     public JSONObject editPerfil(String usuario,String nombre, String mail, String telefono)
     {
         Log.d("HAENTRADO", "HA ENTRADO");
@@ -133,7 +137,7 @@ public class Logica {
                         // do anything with response
                         Log.d("RESPUESTAEDIT", "va editar");
                         try {
-                            JSONObject object = response.getJSONObject(0);
+                            JSONObject object = response.getJSONObject(0);//metemos aqui la respuesta del server
                             jobject = object;
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -148,6 +152,6 @@ public class Logica {
 
                 });
 
-        return jobject;
+        return jobject;//devolvemos el objeto  (Todos lo datos del usuario)
     }
 }
