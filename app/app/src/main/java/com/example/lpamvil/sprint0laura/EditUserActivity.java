@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.os.Bundle;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +17,9 @@ public class EditUserActivity extends AppCompatActivity {
 
     EditText editnombre, editmail,edittelefono;
 
-    String usuario, nombre,mail, telefono;
+    String usuario;
+
+    String nombre,mail, telefono;
 
     JSONObject object2;
     //Bundle datosUsuario;
@@ -31,9 +34,9 @@ public class EditUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-        //datosUsuario = getIntent().getExtras();
 
         //AL ENTRAR EN ESTA PANTALLA DEBEN APARECER LOS DATOS DEL USUARIO DESDE LA BBDD EN LOS TEXTOS DEL EDIT TEXT PARA ASI PODER MODIFICAR SABIENDO LA INFORMACIÓN ANTERIOR
+        //datosUsuario = getIntent().getExtras();
 
         //ASIGNACIÓN DE ELEMENTOS DE LA VIEW
         editnombre = (EditText)findViewById(R.id.editnombre);
@@ -52,9 +55,10 @@ public class EditUserActivity extends AppCompatActivity {
         mail = editmail.getText().toString();
         telefono = edittelefono.getText().toString();
         */
+
         //usuario = datosUsuario.getString("pasarDato2");
 
-        // = "eustaquio";
+         usuario = "eustaquio";
         nombreUs2 = editnombre.getText().toString();
 
 
