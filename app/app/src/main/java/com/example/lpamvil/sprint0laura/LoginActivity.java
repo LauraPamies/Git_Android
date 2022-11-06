@@ -2,10 +2,14 @@ package com.example.lpamvil.sprint0laura;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,8 +30,13 @@ public class LoginActivity extends AppCompatActivity {
     String nombreUs = "";
     String usuarioNom = "";
 
+    CheckBox recordarsesion;
+
     JSONObject object;
 
+
+    SharedPreferences preferencias;
+    SharedPreferences.Editor editorpreferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +45,42 @@ public class LoginActivity extends AppCompatActivity {
         AndroidNetworking.initialize(getApplicationContext());
         user = (EditText) findViewById(R.id.edittextuser);
         pass = (EditText) findViewById(R.id.edittextpass);
-        Logica logica = new Logica();
+        recordarsesion = (CheckBox) findViewById(R.id.recordarsesioncheck);
 
+
+        //Creación de preferencias
+        //Guarda las preferencias compartidas en unas llamadas "sesiones"
+        preferencias = this.getSharedPreferences("sesiones",Context.MODE_PRIVATE);
+        editorpreferencias = preferencias.edit();
+
+        if (revisarSesion()) //si la sesion estaba recordada
+        {
+            startActivity(new Intent(this, UserArea.class));
+        }
+
+
+    }
+
+
+    //REVISA SI LA SESIÓN ESTABA RECORDADA
+    private boolean revisarSesion() {
+        return this.preferencias.getBoolean("sesionrecordada", false);
+    }
+
+
+    //Guarda los datos de la sesión actual (ya esté recordada o no)
+    private void guardarSesion(boolean checked,String nombre,String telefono,String usuario, String mail) {
+        editorpreferencias.putBoolean("sesionrecordada", checked);
+        editorpreferencias.putString("nombre",nombre);
+        editorpreferencias.putString("mail",mail);
+        editorpreferencias.putString("telefono",telefono);
+        editorpreferencias.putString("usuario",usuario);
+        editorpreferencias.apply();
     }
 
     public void botonentrar(View view) throws JSONException {
         String u = user.getText().toString();
         String p = pass.getText().toString();
-        //Toast.makeText(this, p, Toast.LENGTH_LONG).show();
-        //Toast.makeText(this, u, Toast.LENGTH_LONG).show();
 
 
         if (u.equals("") && p.equals("")) {
@@ -55,59 +91,53 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "ERROR: Campo contraseña vacío", Toast.LENGTH_LONG).show();
         } else {
 
-            Log.d("RESPUESTALOGIN ", "entra al login");
 
-            Logica logica = new Logica();
+            Log.d("RESPUESTALOGIN ", "entra al userarea");
 
-            object = logica.login(u,p);//lo metemos en una varieable global y llamamos a la funcion login
-
-            //nombreUs = object.getString("nombre");
-
-
-
-            Toast.makeText(this, "RESPUESTALOGIN1 "+ object.toString(), Toast.LENGTH_LONG).show();
-
+            JSONObject jsonObject = new JSONObject();
             try {
-                Log.d("RESPUESTALOGIN ", object.getString("nombre"));
-                nombreUs = object.getString("nombre");
-                usuarioNom = object.getString("usuario");
-
-
-                //usuario.setNombre(object.getString("nombre"));
-                //Toast.makeText(this, "RESPUESTAUSUARIOusuariogetNombre" + usuario.getNombre(), Toast.LENGTH_LONG).show();ç
-                //Usuario usuario = new Usuario();
-                //usuario.setNombre(object.getString("nombre"));
-
-                //Toast.makeText(this, "RESPUESTA usuario.getNombre " + usuario.getNombre(), Toast.LENGTH_LONG).show();
-
-                Toast.makeText(this, "RESPUESTAUSUARInombreUs" + nombreUs, Toast.LENGTH_LONG).show();
-
-                if(object.toString()!= null){
-                    Intent i = new Intent(LoginActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                    i.putExtra("pasarDato", nombreUs);
-                    i.putExtra("pasarDato2", usuarioNom);
-
-                    //                    i.putExtra("pasarDato", nombreUs);
-                    startActivity(i);
-                    finish();
-                }
-
+                jsonObject.put("username", u);
+                jsonObject.put("password", p);
             } catch (JSONException e) {
-
                 e.printStackTrace();
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
-
             }
 
+            //El método de la api para hacer el post
+            AndroidNetworking.post("http://192.168.0.14:3000/login") //Poner aqui IP propia para enviar al servidor en local
+                    .addJSONObjectBody(jsonObject) // posting json
+                    .setTag("test")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONArray(new JSONArrayRequestListener() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            // do anything with response
+                            Log.d("RESPUESTALOGIN", "va");
 
+                            try {
+                                JSONObject respuesta = response.getJSONObject(0);
+                                Log.d("VALOR DE OBJECT", respuesta.toString());
 
+                                //guarda los datos de la sesión con los datos que recibe del post
+                                guardarSesion(recordarsesion.isChecked(), respuesta.getString("nombre"), respuesta.getString("telefono"), respuesta.getString("usuario"), respuesta.getString("mail"));
 
+                                startActivity(new Intent(LoginActivity.this, UserArea.class));
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError error) {
+                            // handle error
+                            Log.d("RESPUESTALOGINERROR", error.toString());
+                            Toast.makeText(LoginActivity.this, "ERROR: usuario/contraseña incorrectos", Toast.LENGTH_LONG).show();
+
+                        }
+
+                    });
 
         }
-
-        //if(la conexion es = 1 entocnes)----------------------------------------------------------------------------------------------------------------
-        //ha esto habrá que ponerle un if para ir solo si la cuenta está bien
-
-
     }
 }

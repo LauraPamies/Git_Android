@@ -1,5 +1,6 @@
 package com.example.lpamvil.sprint0laura;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
@@ -20,6 +21,10 @@ public class Logica {
     static JSONObject jobject = new JSONObject();
 
     static JSONObject jobject2 = new JSONObject();
+
+    boolean sesionactiva;
+    SharedPreferences preferencias;
+    SharedPreferences.Editor editorpreferencias;
 
 
     public void enviardatosreal(int valorbeacon)
@@ -46,7 +51,7 @@ public class Logica {
 
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://192.168.1.131:8080/altaMedicion")
+        AndroidNetworking.post("http://192.168.0.14:8080/altaMedicion")
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -78,7 +83,7 @@ public class Logica {
         }
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://192.168.1.131:3000/login") //Poner aqui IP propia para enviar al servidor en local
+        AndroidNetworking.post("http://192.168.0.14:3000/login") //Poner aqui IP propia para enviar al servidor en local
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -88,9 +93,9 @@ public class Logica {
                     public void onResponse(JSONArray response) {
                         // do anything with response
                         Log.d("RESPUESTALOGIN", "va");
+
                         try {
-                            JSONObject object = response.getJSONObject(0);
-                            jobject = object;
+                            jobject = response.getJSONObject(0);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -122,7 +127,7 @@ public class Logica {
         }
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://192.168.1.131:3000/update_profile") //Poner aqui IP propia para enviar al servidor en local
+        AndroidNetworking.post("http://192.168.0.14:3000/update_profile") //Poner aqui IP propia para enviar al servidor en local
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)

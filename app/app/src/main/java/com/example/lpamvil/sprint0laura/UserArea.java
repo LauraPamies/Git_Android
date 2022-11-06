@@ -18,11 +18,14 @@ import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanResult;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,13 +43,10 @@ public class UserArea extends AppCompatActivity {
     boolean notificacion_unica = false;
 
     Button botonbluet;
-    //TextView textoamostrar;
-    Bundle datosUsuario;
-    Bundle datosUsuario2;
 
-    TextView cajaBienvenido;
+    TextView nombreUsuarioActivity;
 
-     public String valorbeacon = null;
+    public String valorbeacon = null;
 
 
     public int valorbeaconint;
@@ -54,6 +54,10 @@ public class UserArea extends AppCompatActivity {
 
     private EditText valormedicion;
     private EditText valorid;
+
+
+    SharedPreferences preferencias;
+    SharedPreferences.Editor editorpreferencias;
 
     // --------------------------------------------------------------
     // --------------------------------------------------------------
@@ -283,32 +287,34 @@ public class UserArea extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
+        Log.d("--", " onCreate(): empieza ");
+
         botonbluet = findViewById(R.id.botonbluet);
 
+        //Creación de preferencias
+        preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
+        editorpreferencias = preferencias.edit();
 
-        datosUsuario = getIntent().getExtras();
-        datosUsuario2 = getIntent().getExtras();
-
-        cajaBienvenido = (TextView)findViewById(R.id.nombreUsarioActivity);
-        String datosUsuariosString = datosUsuario.getString("pasarDato");
-        String datosUsuariosString2 = datosUsuario2.getString("pasarDato2");
-
-        cajaBienvenido.setText("¡Bienvenido "+datosUsuariosString+"!");
+        nombreUsuarioActivity = (TextView) findViewById(R.id.nombreUsuarioActivity);
+        Log.d("userarea","entra en la sesion activa");
 
 
+        //Mostrar el nombre de usuario arriba en la pantalla
+        nombreUsuarioActivity.setText(preferencias.getString("nombre","prueba"));
 
-        //textoamostrar = findViewById(R.id.textoamostrar);
-
-        Log.d("--", " onCreate(): empieza ");
         Log.d("--", " onCreate(): termina ");
 
     }
 
     public void logoutbutton(View view)
     {
-        Intent i = new Intent(UserArea.this, MainActivity.class);
-        startActivity(i);
-        finish();
+
+        editorpreferencias.putBoolean("sesionrecordada",false);
+        editorpreferencias.apply();
+        Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, LoginActivity.class));
+
+
     }
 
     public void edituserbutton(View view)
@@ -385,37 +391,4 @@ public class UserArea extends AppCompatActivity {
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
     }
 
-
-
-
-
-/*
-    public void boton_enviar_fake (View quien){
-
-        Log.d("--","Empieza el boton enviar fake hacia logica fake");
-        LogicaFake logicaFake = new LogicaFake();
-        logicaFake.enviardatosfake();
-
-        Log.d("--","Termina el boton enviar fake hacia logica fake");
-
-
-
-    } // ()
-
-    public void boton_enviar_pulsado (View quien){
-
-
-        Log.d("--","Empieza el boton enviar real hacia logica real");
-        Logica logica = new Logica();
-        if (valorbeaconint!=0)
-        {
-            logica.enviardatosreal(valorbeaconint);
-
-        }
-
-        Log.d("--","Termina el boton enviar real hacia logica real");
-
-    } // ()
-
- */
 }

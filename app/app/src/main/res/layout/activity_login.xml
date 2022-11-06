@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/fondologin"
     android:layout_height="match_parent"
+    android:background="@drawable/fondologin"
     tools:context=".LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,10 +75,20 @@
             android:onClick="botonentrar"
             android:text="Entrar"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/recordarsesioncheck"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittextpass" />
+
+        <CheckBox
+            android:id="@+id/recordarsesioncheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Recuerdame"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView

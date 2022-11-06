@@ -3,6 +3,8 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">192.168.1.131</domain>
+        <domain includeSubdomains="true">192.168.0.14</domain>
+
         <!--CREAR OTRO DOMINIO CON LA IP DEL ORDENADOR DONDE SE VAN A ENVIAR LOS POST DEL SERVIDOR-->
     </domain-config>
 </network-security-config>

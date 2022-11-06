@@ -2,8 +2,11 @@ package com.example.lpamvil.sprint0laura;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -19,83 +22,57 @@ public class EditUserActivity extends AppCompatActivity {
 
     String usuario;
 
-    String nombre,mail, telefono;
-
-    JSONObject object2;
-    //Bundle datosUsuario;
-    String nombreUs2 = "";
+    SharedPreferences preferencias;
+    SharedPreferences.Editor editorpreferencias;
 
 
-
-
-    //String datosUsuariosString = datosUsuario.getString("pasarDato2");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
 
-        //AL ENTRAR EN ESTA PANTALLA DEBEN APARECER LOS DATOS DEL USUARIO DESDE LA BBDD EN LOS TEXTOS DEL EDIT TEXT PARA ASI PODER MODIFICAR SABIENDO LA INFORMACIÓN ANTERIOR
-        //datosUsuario = getIntent().getExtras();
 
         //ASIGNACIÓN DE ELEMENTOS DE LA VIEW
         editnombre = (EditText)findViewById(R.id.editnombre);
         editmail = (EditText)findViewById(R.id.editmail);
         edittelefono = (EditText)findViewById(R.id.edittelefono);
-        object2 = null;
-        //Los textos escritos en el editText
+
+
+        //Creación de preferencias
+        preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
+        editorpreferencias = preferencias.edit();
+
+
+
+        //Mostrar en los TextView los valores actuales de datos del usuario
+        usuario = preferencias.getString("usuario","prueba");
+        editnombre.setText(preferencias.getString("nombre","prueba"));
+        editmail.setText(preferencias.getString("mail","prueba"));
+        edittelefono.setText(preferencias.getString("telefono","prueba"));
 
     }
 
     public void botonguardar(View view)throws JSONException
     {
-        /*
-         usuario = "eustaquio";
-        nombre = editnombre.getText().toString();
-        mail = editmail.getText().toString();
-        telefono = edittelefono.getText().toString();
-        */
-
-        //usuario = datosUsuario.getString("pasarDato2");
-
-         usuario = "eustaquio";
-        nombreUs2 = editnombre.getText().toString();
-
-
-        /*
-        usuario = "eustaquio";
-        nombre = "alvero";
-        mail = "alvaro@gmail.com";
-        telefono = "888888888";
-        */
-
-        //Log.d("RESPUESTAEDIT", "datosUsuariosString"+ datosUsuariosString);
 
 
         Logica logica = new Logica();
-        object2 = logica.editPerfil(usuario,editnombre.getText().toString(),editmail.getText().toString(),edittelefono.getText().toString());
-        Toast.makeText(this, "EDITttPARTE"+object2.toString(), Toast.LENGTH_LONG).show();
+        logica.editPerfil(usuario,editnombre.getText().toString(),editmail.getText().toString(),edittelefono.getText().toString());
+
+        //Guardamos las preferencias con los nuevos cambios y aplicamos.
+        editorpreferencias.putString("nombre",editnombre.getText().toString());
+        editorpreferencias.putString("mail",editmail.getText().toString());
+        editorpreferencias.putString("telefono",edittelefono.getText().toString());
+        editorpreferencias.putString("usuario",usuario);
+        editorpreferencias.apply();
 
 
-        //Log.d("RESPUESTALOGIN ", object2.getString("nombre"));
-        //nombreUs = object.getString("nombre");
-        //usuario.setNombre(object.getString("nombre"));
-        //Toast.makeText(this, "RESPUESTAUSUARIOusuariogetNombre" + usuario.getNombre(), Toast.LENGTH_LONG).show();ç
-        //Usuario usuario = new Usuario();
-        //usuario.setNombre(object.getString("nombre"));
 
-        //Toast.makeText(this, "RESPUESTA usuario.getNombre " + usuario.getNombre(), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(EditUserActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-        //Toast.makeText(this, "RESPUESTAUSUARInombreUs" + nombreUs, Toast.LENGTH_LONG).show();
 
-        if(object2.toString()!= null){
-            Intent i = new Intent(EditUserActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-          //i.putExtra("pasarDato", nombreUs);
-            // i.putExtra("pasarDato", nombreUs);
-            i.putExtra("pasarDato", nombreUs2);
-
-            startActivity(i);
-        }
+        startActivity(i);
 
     }
 }

@@ -5,21 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import android.preference.PreferenceManager;
 
-
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,7 +59,11 @@ import okhttp3.OkHttpClient;
 public class MainActivity extends AppCompatActivity {
 
 
+    SharedPreferences preferencias;
+    SharedPreferences.Editor editorpreferencias;
 
+
+    
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @Override
@@ -76,8 +73,24 @@ public class MainActivity extends AppCompatActivity {
         AndroidNetworking.initialize(getApplicationContext());
 
 
+        //Creación de preferencias
+        //Guarda las preferencias compartidas en unas llamadas "sesiones"
+        preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
+        editorpreferencias = preferencias.edit();
+
+        if (revisarSesion()) //si la sesion estaba recordada
+        {
+            startActivity(new Intent(this, UserArea.class));
+        }
+
 
     } // onCreate()
+
+
+    //REVISA SI LA SESIÓN ESTABA RECORDADA
+    private boolean revisarSesion() {
+        return this.preferencias.getBoolean("sesionrecordada", false);
+    }
 
     public void botonlogin(View view){
         Log.d("--","BOTÓN LOGIN PULSADO");
