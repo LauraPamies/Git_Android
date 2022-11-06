@@ -48,7 +48,7 @@
         android:layout_height="329dp"
         android:layout_marginTop="30dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -60,10 +60,10 @@
             android:layout_marginStart="70dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Nombre" />
+            android:text="Antigua Contraseña" />
 
         <EditText
-            android:id="@+id/editnombre"
+            android:id="@+id/editantiguacontra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -77,30 +77,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Correo" />
+            android:text="Nueva Contraseña" />
 
         <EditText
-            android:id="@+id/editmail"
+            android:id="@+id/editnuevacontra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:layout_marginBottom="30dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:fontFamily="@font/quicksandmedium"
-            android:text="Teléfono" />
-
-        <EditText
-            android:id="@+id/edittelefono"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
             android:ems="10"
             android:inputType="textPersonName" />
 
@@ -117,17 +101,6 @@
         android:text="Guardar"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:onClick="botoncambiarcontra"
-        android:text="Cambiar contraseña"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

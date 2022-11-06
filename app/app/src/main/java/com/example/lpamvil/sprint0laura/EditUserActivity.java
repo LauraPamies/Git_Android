@@ -6,15 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.os.Bundle;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class EditUserActivity extends AppCompatActivity {
 
@@ -53,6 +48,12 @@ public class EditUserActivity extends AppCompatActivity {
 
     }
 
+    public void botoncambiarcontra(View view)
+    {
+        startActivity(new Intent(this, CambiarContra.class));
+
+    }
+
     public void botonguardar(View view)throws JSONException
     {
 
@@ -67,12 +68,8 @@ public class EditUserActivity extends AppCompatActivity {
         editorpreferencias.putString("usuario",usuario);
         editorpreferencias.apply();
 
+        startActivity(new Intent(this, UserArea.class));
 
-
-        Intent i = new Intent(EditUserActivity.this, UserArea.class);//SIGUIENTE PAGINAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-
-        startActivity(i);
 
     }
 }

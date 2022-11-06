@@ -25,6 +25,13 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.Transparent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CambiarContra"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EditUserActivity"
             android:exported="false">
             <meta-data
