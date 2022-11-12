@@ -44,7 +44,11 @@ public class UserArea extends AppCompatActivity {
 
     Button botonbluet;
 
+    String nombredispo;
+
     TextView nombreUsuarioActivity;
+    TextView iddispositivouser;
+    TextView textodispoconectado , nivelo3;
 
     public String valorbeacon = null;
 
@@ -72,44 +76,6 @@ public class UserArea extends AppCompatActivity {
     private ScanCallback callbackDelEscaneo = null;
 
 
-    /*
-    // --------------------------------------------------------------
-    // --------------------------------------------------------------
-    @SuppressLint("MissingPermission")
-    private void buscarTodosLosDispositivosBTLE() {
-        Log.d(ETIQUETA_LOG, " buscarTodosLosDispositivosBTL(): empieza ");
-
-        this.callbackDelEscaneo = new ScanCallback() {
-            @Override
-            public void onScanResult( int callbackType, ScanResult resultado ) {
-                super.onScanResult(callbackType, resultado);
-                Log.d(ETIQUETA_LOG, " buscarTodosLosDispositivosBTL(): onScanResult() ");
-
-                mostrarInformacionDispositivoBTLE( resultado );
-            }
-
-            @Override
-            public void onBatchScanResults(List<ScanResult> results) {
-                super.onBatchScanResults(results);
-                Log.d(ETIQUETA_LOG, " buscarTodosLosDispositivosBTL(): onBatchScanResults() ");
-
-            }
-
-            @Override
-            public void onScanFailed(int errorCode) {
-                super.onScanFailed(errorCode);
-                Log.d(ETIQUETA_LOG, " buscarTodosLosDispositivosBTL(): onScanFailed() ");
-
-            }
-        };
-
-        Log.d(ETIQUETA_LOG, " buscarTodosLosDispositivosBTL(): empezamos a escanear ");
-
-        this.elEscanner.startScan( this.callbackDelEscaneo);
-
-    } // ()
-
-     */
 
     // --------------------------------------------------------------
     // --------------------------------------------------------------
@@ -137,7 +103,7 @@ public class UserArea extends AppCompatActivity {
         TramaIBeacon tib = new TramaIBeacon(bytes);
 
         valorbeacon= String.valueOf(Utilidades.bytesToInt(tib.getMajor()));
-        //textoamostrar.setText(valorbeacon);
+        nivelo3.setText(valorbeacon);
 
         valorbeaconint = Integer.parseInt(valorbeacon);
 
@@ -179,15 +145,21 @@ public class UserArea extends AppCompatActivity {
             public void onScanResult( int callbackType, ScanResult resultado ) {
                 super.onScanResult(callbackType, resultado);
 
-                BluetoothDevice bluetoothDevice2 = resultado.getDevice();
+                //BluetoothDevice bluetoothDevice2 = resultado.getDevice();
 
                 Log.d(ETIQUETA_LOG, "  buscarEsteDispositivoBTLE(): onScanResult() ");
-                Log.d(ETIQUETA_LOG, " dispositivo detectado = " + bluetoothDevice2.getName());
-                if(bluetoothDevice2.getName() != null && bluetoothDevice2.getName().equals("GTI-3A")){
+                //Log.d(ETIQUETA_LOG, " dispositivo detectado = " + bluetoothDevice2.getName());
+
+                //                if(bluetoothDevice2.getName() != null && bluetoothDevice2.getName().equals(dispositivoBuscado)){
+                if(resultado.getDevice() != null && resultado.getDevice().getName().equals(dispositivoBuscado)){
                     mostrarInformacionDispositivoBTLE( resultado );
                     notificacion_unica = false;
+                    textodispoconectado.setText("Dispositivo conectado correctamente\nya puedes comenzar a escanear");
+
                 } else{
                     if(notificacion_unica == false){
+
+                        textodispoconectado.setText("Dispositivo no conectado");
                         Log.d(ETIQUETA_LOG, "No se ha encontrado el dispositivo");
                         createNotificationChannel();
                         createNotification();
@@ -289,18 +261,28 @@ public class UserArea extends AppCompatActivity {
         setContentView(R.layout.activity_user_area);
         Log.d("--", " onCreate(): empieza ");
 
-        botonbluet = findViewById(R.id.botonbluet);
+        //botonbluet = findViewById(R.id.botonbluet);
 
         //Creación de preferencias
         preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
         editorpreferencias = preferencias.edit();
 
-        nombreUsuarioActivity = (TextView) findViewById(R.id.nombreUsuarioActivity);
+        //nombreUsuarioActivity = (TextView) findViewById(R.id.nombreUsuarioActivity);
         Log.d("userarea","entra en la sesion activa");
 
+        textodispoconectado = findViewById(R.id.textodispoconectado);
+        nivelo3 = findViewById(R.id.nivelo3);
 
-        //Mostrar el nombre de usuario arriba en la pantalla
-        nombreUsuarioActivity.setText(preferencias.getString("nombre","prueba"));
+        iddispositivouser = findViewById(R.id.iddispositivouser);
+        nombredispo = preferencias.getString("dispositivovinculado","nohay");
+        iddispositivouser.setText("Id del dispositivo: " + nombredispo);
+
+        if (!nombredispo.equals("nohay"))
+        {
+            inicializarBlueTooth();
+            this.buscarEsteDispositivoBTLE(nombredispo);
+
+        }
 
         Log.d("--", " onCreate(): termina ");
 
@@ -310,8 +292,12 @@ public class UserArea extends AppCompatActivity {
     {
 
         editorpreferencias.putBoolean("sesionrecordada",false);
+        editorpreferencias.putString("dispositivovinculado","nohay");
         editorpreferencias.apply();
         Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+        this.detenerBusquedaDispositivosBTLE();
+
+
         startActivity(new Intent(this, LoginActivity.class));
 
 

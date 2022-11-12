@@ -60,7 +60,8 @@
             android:layout_marginStart="70dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Nombre" />
+            android:text="Nombre"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editnombre"
@@ -77,7 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Correo" />
+            android:text="Correo"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editmail"
@@ -94,7 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Teléfono" />
+            android:text="Teléfono"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/edittelefono"
@@ -127,6 +130,7 @@
         android:layout_marginBottom="50dp"
         android:onClick="botoncambiarcontra"
         android:text="Cambiar contraseña"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

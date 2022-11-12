@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         editorpreferencias.putString("mail",mail);
         editorpreferencias.putString("telefono",telefono);
         editorpreferencias.putString("usuario",usuario);
+        editorpreferencias.putString("dispositivovinculado","nohay");
         editorpreferencias.apply();
     }
 
@@ -124,7 +125,15 @@ public class LoginActivity extends AppCompatActivity {
                                 //guarda los datos de la sesión con los datos que recibe del post
                                 guardarSesion(recordarsesion.isChecked(), respuesta.getString("nombre"), respuesta.getString("telefono"), respuesta.getString("usuario"), respuesta.getString("mail"));
 
-                                startActivity(new Intent(LoginActivity.this, UserArea.class));
+                                String dispositivovinculado = preferencias.getString("dispositivovinculado","nohay");
+                                if (dispositivovinculado.equals("nohay"))
+                                {
+                                    startActivity(new Intent(LoginActivity.this, AnyadirDispositivo.class));
+
+                                }else {
+                                    startActivity(new Intent(LoginActivity.this, UserArea.class));
+
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

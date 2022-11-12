@@ -53,6 +53,18 @@ public class CambiarContra extends AppCompatActivity {
 
     }
 
+    public void logoutbutton(View view)
+    {
+        editorpreferencias.putBoolean("sesionrecordada",false);
+        editorpreferencias.putString("dispositivovinculado","nohay");
+        editorpreferencias.apply();
+        Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+
+
+        startActivity(new Intent(this, LoginActivity.class));
+
+
+    }
 
     public void botonguardar(View view)throws JSONException
     {
@@ -63,13 +75,7 @@ public class CambiarContra extends AppCompatActivity {
         Log.d("OLDPASS", "botonguardar: " + oldpass + " " + newpass + " " + newpass2);
         if (newpass.equals(newpass2))   //SI AMBAS CONTRASEÑAS NUEVAS SON IGUALES
         {
-            //Logica logica = new Logica();
 
-            //JSONObject result = logica.cambiarcontra(oldpass,newpass,preferencias.getString("usuario","prueba"));
-
-            //Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
-
-            //Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
 
             JSONObject jsonObject = new JSONObject();
             try{
@@ -130,66 +136,10 @@ public class CambiarContra extends AppCompatActivity {
                         }
                     });
 
- /*
-                            try {
-                                if (response.getString("code").equals("666")) //contraseña incorrecta
-                                {
-                                    try {
-                                        Log.d("RESULTADOCAMBIARCONTRA" , "codigo : " + response.getString("code"));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    Toast.makeText(CambiarContra.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
-
-                                }else {
-                                    try {
-                                        if (response.getString("code").equals("504"))   //contraseñas iguales
-                                        {
-                                            try {
-                                                Log.d("RESULTADOCAMBIARCONTRA" , "codigo : " + response.getString("code"));
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            Toast.makeText(CambiarContra.this, "La contraseña nueva no puede ser igual que la anterior", Toast.LENGTH_SHORT).show();
-
-                                        }else {
-                                            Toast.makeText(CambiarContra.this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(CambiarContra.this, UserArea.class));
-
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                                 */
 
 
-/*
-            if (result.getString("code").equals("666")) //contraseña incorrecta
-            {
-                Log.d("RESULTADOCAMBIARCONTRA" , "codigo : " + result.getString("code"));
 
-                Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
 
-            }else if (result.getString("code").equals("504"))   //contraseñas iguales
-            {
-                Log.d("RESULTADOCAMBIARCONTRA" , "codigo : " + result.getString("code"));
-
-                Toast.makeText(this, "La contraseña nueva no puede ser igual que la anterior", Toast.LENGTH_SHORT).show();
-
-            }else {
-                Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, UserArea.class));
-
-            }
-
- */
         }
         else {
             Toast.makeText(this, "Las contraseñas nuevas no son iguales", Toast.LENGTH_SHORT).show();

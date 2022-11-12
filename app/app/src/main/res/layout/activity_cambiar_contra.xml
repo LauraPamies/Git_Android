@@ -37,6 +37,18 @@
             app:layout_constraintVertical_bias="0.68"
             app:srcCompat="@drawable/icono1"/>
 
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="logoutbutton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65"
+            app:srcCompat="@drawable/ic_baseline_logout_40" />
+
 
 
 
@@ -60,7 +72,8 @@
             android:layout_marginStart="70dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Antigua Contraseña" />
+            android:text="Antigua Contraseña"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editantiguacontra"
@@ -77,7 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Nueva Contraseña" />
+            android:text="Nueva Contraseña"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editnuevacontra"
@@ -94,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:fontFamily="@font/quicksandmedium"
-            android:text="Repetir nueva Contraseña" />
+            android:text="Repetir nueva Contraseña"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/editnuevacontra2"
@@ -127,6 +142,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/quicksandmedium"
         android:text="Cambiar Contraseña"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
