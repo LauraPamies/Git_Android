@@ -84,6 +84,10 @@ public class VincularDispo extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.d("ERROR QR",e.toString());
+
+                    Log.d("ERROR","EL QR RECIBIDO NO ES UN JSON");
+
                 }
                 try {
                     iddispositivo.setText("Id del dispositivo: " + sensor.getString("nombre"));
