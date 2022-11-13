@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.JsonReader;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +19,16 @@ import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class VincularDispo extends AppCompatActivity {
 
 
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
     TextView iddispositivo;
-    String nombredispo;
+    JSONObject sensor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,11 @@ public class VincularDispo extends AppCompatActivity {
     }
 
 
+    //------------------------------------------------
+    //  View: view -->
+    //  escanearqr()
+    //
+    //------------------------------------------------
     public void escanearqr(View view)
     {
 
@@ -51,6 +61,11 @@ public class VincularDispo extends AppCompatActivity {
     }
 
 
+    //------------------------------------------------
+    //  RequestCode: int, ResultCode: int, Data: Intent -->
+    //  onActivityResult()
+    //
+    //------------------------------------------------
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
     {
@@ -60,8 +75,34 @@ public class VincularDispo extends AppCompatActivity {
             if(resultado.getContents() == null){
                 Toast.makeText(this, "Lectura cancelada", Toast.LENGTH_LONG).show();
             } else {
-                iddispositivo.setText("Id del dispositivo: " + resultado.getContents());
-                nombredispo = resultado.getContents();
+
+                try {
+
+                    sensor = new JSONObject(resultado.getContents());
+                    Log.d("RESULTADOJSON",sensor.toString());
+                    Log.d("RESULTADOJSON",sensor.getString("nombre"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    iddispositivo.setText("Id del dispositivo: " + sensor.getString("nombre"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    editorpreferencias.putString("dispositivovinculado",sensor.getString("nombre"));
+                    editorpreferencias.putString("tiposensor",sensor.getString("tipo"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                editorpreferencias.apply();
+
+
+                //addDispositivobbdd(nombredispo,tipodispo);
+                //AQUI DEBEMOS AÑADIR EL DISPOSITIVO A LA BBDD DEL USUARIO
+
 
             }
         } else {
@@ -70,14 +111,37 @@ public class VincularDispo extends AppCompatActivity {
         }
     }
 
+    private void addDispositivobbdd(String nombredispo,String tipodispo)
+    {
+        //HACE EL INSERT EN LA BBDD
+    }
+
+
+    //------------------------------------------------
+    //  View: view -->
+    //  guardardispositivovinculado()
+    //
+    //------------------------------------------------
     public void guardardispositivovinculado(View view)
     {
-        editorpreferencias.putString("dispositivovinculado",nombredispo);
-        editorpreferencias.apply();
-        startActivity(new Intent(this, UserArea.class));
+        if(!preferencias.getString("dispositivovinculado", "nohay").equals("nohay")) //si ha encontrado algún dispositivo
+        {
+            Toast.makeText(this, "Dispositivo vinculado correctamente", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, UserArea.class));
+
+        }else {
+            Toast.makeText(this, "No se ha podido vincular el dispositivo", Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
+
+    //------------------------------------------------
+    //  View: view -->
+    //  logoutbutton()
+    //
+    //------------------------------------------------
 
     public void logoutbutton(View view)
     {

@@ -28,12 +28,8 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
 
     EditText user, pass;
-    String nombreUs = "";
-    String usuarioNom = "";
-
     CheckBox recordarsesion;
 
-    JSONObject object;
 
 
     SharedPreferences preferencias;
@@ -64,24 +60,64 @@ public class LoginActivity extends AppCompatActivity {
 
 
     //REVISA SI LA SESIÓN ESTABA RECORDADA
+    //------------------------------------------------
+    //
+    //  revisarSesion()
+    //  --> boolean
+    //------------------------------------------------
     private boolean revisarSesion() {
         return this.preferencias.getBoolean("sesionrecordada", false);
     }
 
 
+    //------------------------------------------------
+    //  Checked: boolean, Nombre: String, Telefono: String, Usuario: String, Mail: String -->
+    //  guardarSesion()
+    //
+    //------------------------------------------------
     //Guarda los datos de la sesión actual (ya esté recordada o no)
-    private void guardarSesion(boolean checked,String nombre,String telefono,String usuario, String mail) {
+    private void guardarSesion(boolean checked,String nombre,String telefono,String usuario, String mail) throws JSONException {
         editorpreferencias.putBoolean("sesionrecordada", checked);
         editorpreferencias.putString("nombre",nombre);
         editorpreferencias.putString("mail",mail);
         editorpreferencias.putString("telefono",telefono);
         editorpreferencias.putString("usuario",usuario);
-        editorpreferencias.putString("dispositivovinculado","nohay");
+
+        //aqui obtiene el dispositivo de la bbdd del usuario
+        JSONObject sensor = obtenerdispositivobbdd(usuario);
+        String nombredispo = sensor.getString("nombre");
+        String tiposensor = sensor.getString("tipo");
+
+        editorpreferencias.putString("dispositivovinculado",nombredispo);
+        editorpreferencias.putString("tiposensor",tiposensor);
+
         editorpreferencias.apply();
     }
 
 
+    //------------------------------------------------
+    //  Usuario: String -->
+    //  obtenerdispositivobbdd()
+    //  --> JSONObject
+    //------------------------------------------------
+    private JSONObject obtenerdispositivobbdd(String usuario) throws JSONException {
+        //hace el select de la bbdd
 
+
+        //si el usuario no tiene ningún dispositivo vinculado
+        JSONObject sensor = new JSONObject();
+        sensor.put("tipo", "");
+        sensor.put("nombre","nohay");
+        return sensor;
+    }
+
+
+
+    //------------------------------------------------
+    //  View: view -->
+    //  botonentrar()
+    //
+    //------------------------------------------------
     public void botonentrar(View view) throws JSONException {
         String u = user.getText().toString();
         String p = pass.getText().toString();

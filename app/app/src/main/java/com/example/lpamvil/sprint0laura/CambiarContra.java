@@ -53,6 +53,12 @@ public class CambiarContra extends AppCompatActivity {
 
     }
 
+
+    //------------------------------------------------
+    //  View: view -->
+    //  logoutbutton()
+    //
+    //------------------------------------------------
     public void logoutbutton(View view)
     {
         editorpreferencias.putBoolean("sesionrecordada",false);
@@ -66,6 +72,11 @@ public class CambiarContra extends AppCompatActivity {
 
     }
 
+    //------------------------------------------------
+    //  View: view -->
+    //  botonguardar()
+    //
+    //------------------------------------------------
     public void botonguardar(View view)throws JSONException
     {
         oldpass = editcontraantigua.getText().toString();

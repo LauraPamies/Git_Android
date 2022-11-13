@@ -27,11 +27,15 @@ public class Logica {
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
 
-
+    //------------------------------------------------
+    //  valorbeacon: int -->
+    //  editPerfil()
+    //
+    //------------------------------------------------
     public void enviardatosreal(int valorbeacon)
     {
 
-//pueba comentario
+
         //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
         Medida medida = new Medida(valorbeacon,fechaactual.toString(),38.99694087643454,-0.1650828343732021);
        
@@ -73,47 +77,12 @@ public class Logica {
     }
 
 
-    public JSONObject login(String usuario,String contrasena)
-    {
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("username",usuario);
-            jsonObject.put("password",contrasena);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        //El método de la api para hacer el post
-        AndroidNetworking.post("http://192.168.0.14:3000/login") //Poner aqui IP propia para enviar al servidor en local
-                .addJSONObjectBody(jsonObject) // posting json
-                .setTag("test")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        // do anything with response
-                        Log.d("RESPUESTALOGIN", "va");
-
-                        try {
-                            jobject = response.getJSONObject(0);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Log.d("RESPUESTALOGIN", error.toString());
-
-                    }
-
-                });
-
-        return jobject;
-    }
-
+    //------------------------------------------------
+    //  usuario: String, nombre: String, mail: String, telefono: String -->
+    //  editPerfil()
+    //  --> JSONObject
+    //------------------------------------------------
     public JSONObject editPerfil(String usuario,String nombre, String mail, String telefono)
     {
         Log.d("HAENTRADO", "HA ENTRADO");
@@ -158,103 +127,6 @@ public class Logica {
         return jobject;
     }
 
-    /*
-    public JSONObject cambiarcontra(String contraantigua,String contranueva, String usuario) {
-
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("usuario",usuario);
-            jsonObject.put("oldpass",contraantigua);
-            jsonObject.put("newpass",contranueva);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        AndroidNetworking.post("http://192.168.0.14:3000/change_password")
-                .addJSONObjectBody(jsonObject) // posting json
-                .setTag("test")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // do anything with response
-
-                        Log.d("RESPUESTAEDIT", "va editar");
-
-                        jobject = response;
-
-                        Log.d("RESPUESTA ONRESPONSE: ", response.toString());
-
-                    }
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Log.d("RESPUESTA ONERROR", error.toString());
-
-                        Log.d("RESPUESTA ONERROR", "onError errorCode : " + error.getErrorCode());
-                        Log.d("RESPUESTA ONERROR", "onError errorBody : " + error.getErrorBody());
-                        Log.d("RESPUESTA ONERROR", "onError errorDetail : " + error.getErrorDetail());
-
-                    }
-                });
-
-        return jobject;
-
-
-*/
-        /*
-
-        Log.d("HAENTRADO", "HA ENTRADO");
-
-        JSONObject jsonObject = new JSONObject();
-        try{
-            jsonObject.put("usuario",usuario);
-            jsonObject.put("oldpass",contraantigua);
-            jsonObject.put("newpass",contranueva);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        //El método de la api para hacer el post
-        AndroidNetworking.post("http://192.168.0.14:3000/change_password") //Poner aqui IP propia para enviar al servidor en local
-                .addJSONObjectBody(jsonObject) // posting json
-                .setTag("test")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        // do anything with response
-                        Log.d("RESPUESTAEDIT", "va editar");
-                        try {
-                            JSONObject object = response.getJSONObject(0);
-                            Log.d("CAMBIARCONTRARESPONSE", response.toString());
-
-                            Log.d("CAMBIARCONTRA", object.toString());
-
-                            jobject = object;
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("EXCEPCIONJSON","hay una excepcion");
-                        }
-                    }
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Log.d("ERROR EN CAMBIAR CONTRA", error.toString());
-                        Log.d("RESPUESTA ONERROR", "onError errorCode : " + error.getErrorCode());
-                        Log.d("RESPUESTA ONERROR", "onError errorBody : " + error.getErrorBody());
-                        Log.d("RESPUESTA ONERROR", "onError errorDetail : " + error.getErrorDetail());
-
-                    }
-
-                });
-
-        return jobject;
-        */
 
 
 

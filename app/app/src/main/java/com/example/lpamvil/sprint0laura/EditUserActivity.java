@@ -48,12 +48,23 @@ public class EditUserActivity extends AppCompatActivity {
 
     }
 
+
+    //------------------------------------------------
+    //  View: view -->
+    //  botoncambiarcontra()
+    //
+    //------------------------------------------------
     public void botoncambiarcontra(View view)
     {
         startActivity(new Intent(this, CambiarContra.class));
 
     }
 
+    //------------------------------------------------
+    //  View: view -->
+    //  botonguardar()
+    //
+    //------------------------------------------------
     public void botonguardar(View view)throws JSONException
     {
 

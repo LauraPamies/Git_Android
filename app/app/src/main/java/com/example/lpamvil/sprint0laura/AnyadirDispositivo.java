@@ -22,11 +22,22 @@ public class AnyadirDispositivo extends AppCompatActivity {
         editorpreferencias = preferencias.edit();
     }
 
+
+    //------------------------------------------------
+    //  View: view -->
+    //  anyadirdispo()
+    //
+    //------------------------------------------------
     public void anyadirdispo(View view){
         startActivity(new Intent(AnyadirDispositivo.this, VincularDispo.class));
 
     }
 
+    //------------------------------------------------
+    //  View: view -->
+    //  logoutbutton()
+    //
+    //------------------------------------------------
     public void logoutbutton(View view)
     {
 
