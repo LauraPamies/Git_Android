@@ -18,6 +18,7 @@ import java.util.Date;
 
 public class Logica {
 
+    String ip = "192.168.0.14";
     Date fechaactual = new Date();
 
     static JSONObject jobject = new JSONObject();
@@ -83,22 +84,22 @@ public class Logica {
     //  editPerfil()
     //  --> JSONObject
     //------------------------------------------------
-    public JSONObject editPerfil(String usuario,String nombre, String mail, String telefono)
+    public void editPerfil(String usuario,String nombre, String mail, String telefono)
     {
         Log.d("HAENTRADO", "HA ENTRADO");
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject.put("usuario",usuario);
-            jsonObject.put("nombre",nombre);
+            jsonObject.put("username",usuario);
+            jsonObject.put("name",nombre);
             jsonObject.put("mail",mail);
-            jsonObject.put("telefono",telefono);
+            jsonObject.put("phone",telefono);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://192.168.43.79:3000/update_profile") //Poner aqui IP propia para enviar al servidor en local
+        AndroidNetworking.post("http://" + ip + ":3000/update_profile") //Poner aqui IP propia para enviar al servidor en local
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -108,12 +109,7 @@ public class Logica {
                     public void onResponse(JSONArray response) {
                         // do anything with response
                         Log.d("RESPUESTAEDIT", "va editar");
-                        try {
-                            JSONObject object = response.getJSONObject(0);
-                            jobject = object;
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
                     }
                     @Override
                     public void onError(ANError error) {
@@ -124,10 +120,46 @@ public class Logica {
 
                 });
 
-        return jobject;
+
     }
 
 
+    public void insertarDispo(String usuario,String tiposensor, String nombresensor)
+    {
+        Log.d("HAENTRADO", "HA ENTRADO");
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("username",usuario);
+            jsonObject.put("type",tiposensor);
+            jsonObject.put("name",nombresensor);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //El método de la api para hacer el post
+        AndroidNetworking.post("http://" + ip +":3000/insert_sensor") //Poner aqui IP propia para enviar al servidor en local
+                .addJSONObjectBody(jsonObject) // posting json
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // do anything with response
+                        Log.d("RESPUESTAInsertSensor", "va insertar sensor");
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.d("RESPUESTAEDIT", error.toString());
+
+                    }
+
+                });
+
+    }
 
 
     }

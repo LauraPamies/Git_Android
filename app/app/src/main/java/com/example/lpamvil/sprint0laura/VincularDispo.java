@@ -104,7 +104,7 @@ public class VincularDispo extends AppCompatActivity {
                 editorpreferencias.apply();
 
 
-                //addDispositivobbdd(nombredispo,tipodispo);
+                addDispositivobbdd(preferencias.getString("dispositivovinculado",""),preferencias.getString("tiposensor",""));
                 //AQUI DEBEMOS AÑADIR EL DISPOSITIVO A LA BBDD DEL USUARIO
 
 
@@ -118,6 +118,8 @@ public class VincularDispo extends AppCompatActivity {
     private void addDispositivobbdd(String nombredispo,String tipodispo)
     {
         //HACE EL INSERT EN LA BBDD
+        Logica logica = new Logica();
+        logica.insertarDispo(preferencias.getString("usuario",""),tipodispo,nombredispo);
     }
 
 

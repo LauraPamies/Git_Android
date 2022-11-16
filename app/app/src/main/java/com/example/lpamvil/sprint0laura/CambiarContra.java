@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 public class CambiarContra extends AppCompatActivity {
 
+    String ip = "192.168.0.14";
+
 
     EditText editcontraantigua, editcontranueva, editcontranuevarepetir;
 
@@ -90,7 +92,7 @@ public class CambiarContra extends AppCompatActivity {
 
             JSONObject jsonObject = new JSONObject();
             try{
-                jsonObject.put("usuario",preferencias.getString("usuario","prueba"));
+                jsonObject.put("username",preferencias.getString("usuario","prueba"));
                 jsonObject.put("oldpass",oldpass);
                 jsonObject.put("newpass",newpass);
 
@@ -98,7 +100,7 @@ public class CambiarContra extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            AndroidNetworking.post("http://192.168.0.14:3000/change_password")
+            AndroidNetworking.post("http://" + ip + ":3000/change_password")
                     .addJSONObjectBody(jsonObject) // posting json
                     .setTag("test")
                     .setPriority(Priority.MEDIUM)

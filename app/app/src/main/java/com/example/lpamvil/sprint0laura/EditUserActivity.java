@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -78,6 +79,8 @@ public class EditUserActivity extends AppCompatActivity {
         editorpreferencias.putString("telefono",edittelefono.getText().toString());
         editorpreferencias.putString("usuario",usuario);
         editorpreferencias.apply();
+
+        Toast.makeText(EditUserActivity.this, "Perfil editado correctamente", Toast.LENGTH_SHORT).show();
 
         startActivity(new Intent(this, UserArea.class));
 

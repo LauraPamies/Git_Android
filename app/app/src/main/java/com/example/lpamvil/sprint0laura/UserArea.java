@@ -164,7 +164,6 @@ public class UserArea extends AppCompatActivity {
                 Log.d(ETIQUETA_LOG, "  buscarEsteDispositivoBTLE(): onScanResult() ");
                 //Log.d(ETIQUETA_LOG, " dispositivo detectado = " + bluetoothDevice2.getName());
                 Log.d("DISPOSITIVO BUSCADO",dispositivoBuscado);
-                Log.d("DISPOSITIVO RESULTADO",resultado.getDevice().getName());
 
 
                 if(resultado.getDevice().getName() != null && resultado.getDevice().getName().equals(dispositivoBuscado)){
@@ -381,5 +380,7 @@ public class UserArea extends AppCompatActivity {
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
     }
+
+
 
 }

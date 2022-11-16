@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, pass;
     CheckBox recordarsesion;
 
-
+    String ip = "192.168.0.14";
 
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Creación de preferencias
         //Guarda las preferencias compartidas en unas llamadas "sesiones"
-        preferencias = this.getSharedPreferences("sesiones",Context.MODE_PRIVATE);
+        preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
         editorpreferencias = preferencias.edit();
 
         if (revisarSesion()) //si la sesion estaba recordada
@@ -76,40 +76,77 @@ public class LoginActivity extends AppCompatActivity {
     //
     //------------------------------------------------
     //Guarda los datos de la sesión actual (ya esté recordada o no)
-    private void guardarSesion(boolean checked,String nombre,String telefono,String usuario, String mail) throws JSONException {
+    private void guardarSesion(boolean checked, String nombre, String telefono, String usuario, String mail) throws JSONException {
         editorpreferencias.putBoolean("sesionrecordada", checked);
-        editorpreferencias.putString("nombre",nombre);
-        editorpreferencias.putString("mail",mail);
-        editorpreferencias.putString("telefono",telefono);
-        editorpreferencias.putString("usuario",usuario);
+        editorpreferencias.putString("nombre", nombre);
+        editorpreferencias.putString("mail", mail);
+        editorpreferencias.putString("telefono", telefono);
+        editorpreferencias.putString("usuario", usuario);
 
         //aqui obtiene el dispositivo de la bbdd del usuario
-        JSONObject sensor = obtenerdispositivobbdd(usuario);
-        String nombredispo = sensor.getString("nombre");
-        String tiposensor = sensor.getString("tipo");
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", usuario);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        editorpreferencias.putString("dispositivovinculado",nombredispo);
-        editorpreferencias.putString("tiposensor",tiposensor);
+        //El método de la api para hacer el post
+        AndroidNetworking.post("http://" + ip + ":3000/get_one_sensor") //Poner aqui IP propia para enviar al servidor en local
+                .addJSONObjectBody(jsonObject) // posting json
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // do anything with response
+                        Log.d("RESPUESTAGETONESENSOR", "va");
 
-        editorpreferencias.apply();
+                        try {
+                            JSONObject respuesta = response.getJSONObject(0);
+                            Log.d("VALOR DE OBJECT", respuesta.toString());
+
+                            editorpreferencias.putString("tiposensor", respuesta.getString("Tipo"));
+                            editorpreferencias.putString("idSensor", respuesta.getString("idSensor"));
+                            editorpreferencias.putString("dispositivovinculado", respuesta.getString("Nombre"));
+                            editorpreferencias.putString("idUsuario", respuesta.getString("idUsuario"));
+
+                            editorpreferencias.apply();
+
+                            Log.d("APLICA LAS PREFERENCIAS", "APLICA LAS PREFERENCIAS DEL SENSOR");
+
+                            startActivity(new Intent(LoginActivity.this, UserArea.class));
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.d("RESPUESTALOGINERROR", error.toString());
+
+                        //si el usuario no tiene ningún dispositivo vinculado
+
+                        editorpreferencias.putString("tiposensor", "");
+                        editorpreferencias.putString("idSensor", "");
+                        editorpreferencias.putString("dispositivovinculado", "nohay");
+                        editorpreferencias.putString("idUsuario", "");
+
+                        editorpreferencias.apply();
+                        startActivity(new Intent(LoginActivity.this, AnyadirDispositivo.class));
+
+
+                    }
+
+                });
+
+
     }
 
-
-    //------------------------------------------------
-    //  Usuario: String -->
-    //  obtenerdispositivobbdd()
-    //  --> JSONObject
-    //------------------------------------------------
-    private JSONObject obtenerdispositivobbdd(String usuario) throws JSONException {
-        //hace el select de la bbdd
-
-
-        //si el usuario no tiene ningún dispositivo vinculado
-        JSONObject sensor = new JSONObject();
-        sensor.put("tipo", "");
-        sensor.put("nombre","nohay");
-        return sensor;
-    }
 
 
 
@@ -159,17 +196,9 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("VALOR DE OBJECT", respuesta.toString());
 
                                 //guarda los datos de la sesión con los datos que recibe del post
-                                guardarSesion(recordarsesion.isChecked(), respuesta.getString("nombre"), respuesta.getString("telefono"), respuesta.getString("usuario"), respuesta.getString("mail"));
+                                guardarSesion(recordarsesion.isChecked(), respuesta.getString("Nombre"), respuesta.getString("Telefono"), respuesta.getString("Usuario"), respuesta.getString("mail"));
 
-                                String dispositivovinculado = preferencias.getString("dispositivovinculado","nohay");
-                                if (dispositivovinculado.equals("nohay"))
-                                {
-                                    startActivity(new Intent(LoginActivity.this, AnyadirDispositivo.class));
 
-                                }else {
-                                    startActivity(new Intent(LoginActivity.this, UserArea.class));
-
-                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
