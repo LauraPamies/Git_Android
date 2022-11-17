@@ -26,6 +26,11 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.Transparent"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MenuLateralActivity"
+            android:exported="false"
+            android:label="@string/title_activity_menu_lateral"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.Transparent.NoActionBar" />
+        <activity
             android:name=".VincularDispo"
             android:exported="false">
             <meta-data
@@ -68,11 +73,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
     </application>
 
 </manifest>

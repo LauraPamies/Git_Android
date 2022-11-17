@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             //El método de la api para hacer el post
-            AndroidNetworking.post("http://192.168.0.14:3000/login") //Poner aqui IP propia para enviar al servidor en local
+            AndroidNetworking.post("http://172.20.10.2:3000/login") //Poner aqui IP propia para enviar al servidor en local
                     .addJSONObjectBody(jsonObject) // posting json
                     .setTag("test")
                     .setPriority(Priority.MEDIUM)
