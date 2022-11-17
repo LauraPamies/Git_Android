@@ -317,6 +317,15 @@ public class UserArea extends AppCompatActivity {
     }
 
 
+
+    public void editbutton(View view)
+    {
+
+        startActivity(new Intent(this, EditUserActivity.class));
+
+
+    }
+
     //------------------------------------------------
     //  view: View
     //  logoutbutton()

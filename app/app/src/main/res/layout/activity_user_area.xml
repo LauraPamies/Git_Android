@@ -87,6 +87,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textodispoconectado" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:onClick="editbutton"
+        android:text="Editar Perfil"
+        app:layout_constraintEnd_toEndOf="@+id/tiposensor"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/tiposensor"
+        app:layout_constraintTop_toBottomOf="@+id/tiposensor" />
+
     <!--
     <Button
         android:id="@+id/botonbluet"
