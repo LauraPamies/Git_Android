@@ -290,6 +290,18 @@ public class UserArea extends AppCompatActivity {
 
         //botonbluet = findViewById(R.id.botonbluet);
 
+        //-----------------------------------------------------------------------ALVARO MENUUUUUUUUUUUUUUU
+        Button boton1 = (Button)findViewById(R.id.menuButton4);
+        boton1.setOnClickListener(v -> {
+         Intent intencion = new Intent(getApplicationContext(), menuSlideActivity.class);
+         startActivity(intencion);
+
+        });
+
+
+        //-----------------------------------------------------------------------ALVARO MENUUUUUUUUUUUUUUU
+
+
         //Creación de preferencias
         preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
         editorpreferencias = preferencias.edit();
