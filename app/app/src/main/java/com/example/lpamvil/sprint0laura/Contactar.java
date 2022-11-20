@@ -53,7 +53,7 @@ public class Contactar extends AppCompatActivity{
 
         @Override
         protected Integer doInBackground(String... variableNoUsada) {
-            Mail m = new Mail("ivandiscobolo@gmail.com", "qjmz psin cxwy zlfu");
+            Mail m = new Mail("ivandiscobolo@gmail.com", "");
 
             EditText campo_correo = (EditText) findViewById(R.id.correo);
             EditText campo_asunto = (EditText) findViewById(R.id.asunto);
