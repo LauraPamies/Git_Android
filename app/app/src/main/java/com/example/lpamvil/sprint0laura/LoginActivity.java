@@ -217,4 +217,8 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+
+    public void botonContactar(View view){
+        startActivity(new Intent(this, Contactar.class));
+    }
 }
