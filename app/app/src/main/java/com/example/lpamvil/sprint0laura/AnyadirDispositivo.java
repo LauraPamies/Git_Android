@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+//En esta clase se cargará la actividad para pulsar el botón de añadir dispositivos
 public class AnyadirDispositivo extends AppCompatActivity {
 
     SharedPreferences preferencias;
@@ -23,21 +24,23 @@ public class AnyadirDispositivo extends AppCompatActivity {
     }
 
 
-    //------------------------------------------------
-    //  View: view -->
-    //  anyadirdispo()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Al pulsar este botón se nos redirigirá a la pantalla de vincular dispositivo
+     *
+     * View-> anyadirdispo()
+     *
+     */
     public void anyadirdispo(View view){
         startActivity(new Intent(AnyadirDispositivo.this, VincularDispo.class));
 
     }
 
-    //------------------------------------------------
-    //  View: view -->
-    //  logoutbutton()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Al pulsar este botón el usuario se desconectará de la sesión
+     *
+     * View-> logoutbutton()
+     *
+     */
     public void logoutbutton(View view)
     {
 

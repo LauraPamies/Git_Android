@@ -35,6 +35,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
+
+//En esta clase estará la zona del usuario.
+
 public class UserArea extends AppCompatActivity {
     // Variables related to notifications
     private final static String CHANNEL_ID = "NOTIFICACION";
@@ -75,13 +78,12 @@ public class UserArea extends AppCompatActivity {
     private ScanCallback callbackDelEscaneo = null;
 
 
-
-    //------------------------------------------------
-    //  resultado: ScanResult -->
-    //  guardardispositivovinculado()
-    //
-    //------------------------------------------------
-
+    /*
+     * @brief Muestra la información del dispositivo escaneado
+     * ScanResult:resultado -> mostrarInformacionDispositivoBTLE()
+     *
+     * @param resultado el resultado obtenido del escaner
+     */
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @SuppressLint("MissingPermission")
@@ -137,12 +139,12 @@ public class UserArea extends AppCompatActivity {
 
 
 
-    //------------------------------------------------
-    //  dispositivoBuscado: String -->
-    //  buscarEsteDispositivoBTLE()
-    //
-    //------------------------------------------------
-
+    /*
+     * @brief Busca un dispositivo BTLE por el nombre que se le pase como parámetro
+     * String:dispositivoBuscado -> buscarEsteDispositivoBTLE()
+     *
+     * @param dispositivoBuscado nombre del dispositivo que tiene que buscar
+     */
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @SuppressLint("MissingPermission")
@@ -212,11 +214,12 @@ public class UserArea extends AppCompatActivity {
 
 
 
-    //------------------------------------------------
-    //
-    //  detenerBusquedaDispositivosBTLE()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Detiene la búsqueda de los dispositivos BTLE
+     *
+     * detenerBusquedaDispositivosBTLE()
+     *
+     */
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @SuppressLint("MissingPermission")
@@ -238,6 +241,13 @@ public class UserArea extends AppCompatActivity {
     //  inicializarBlueTooth()
     //
     //------------------------------------------------
+
+    /*
+     * @brief Inicializa el bluetooth en la app
+     *
+     * inicializarBlueTooth()
+     *
+     */
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @SuppressLint("MissingPermission")
@@ -317,11 +327,12 @@ public class UserArea extends AppCompatActivity {
     }
 
 
-    //------------------------------------------------
-    //  view: View
-    //  logoutbutton()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Al pulsar este botón el usuario se desconectará de la sesión
+     *
+     * View-> logoutbutton()
+     *
+     */
     public void logoutbutton(View view)
     {
 

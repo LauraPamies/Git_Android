@@ -22,6 +22,8 @@ import com.journeyapps.barcodescanner.ScanOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+// En esta clase se va a vincular el dispositivo mediante un QR
 public class VincularDispo extends AppCompatActivity {
 
 
@@ -39,11 +41,12 @@ public class VincularDispo extends AppCompatActivity {
     }
 
 
-    //------------------------------------------------
-    //  View: view -->
-    //  escanearqr()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Al pulsar este botón se abrirá el escaner QR
+     *
+     * View-> escanearqr()
+     *
+     */
     public void escanearqr(View view)
     {
 
@@ -61,6 +64,7 @@ public class VincularDispo extends AppCompatActivity {
     }
 
 
+    // @brief Al escanear el QR, si ha ido bien se añadirá el dispositivo vinculado al usuario
     //------------------------------------------------
     //  RequestCode: int, ResultCode: int, Data: Intent -->
     //  onActivityResult()
@@ -115,6 +119,16 @@ public class VincularDispo extends AppCompatActivity {
         }
     }
 
+
+    /*
+     * @brief Se añadirá el dispositivo a la bbdd del usuario
+     *
+     * String:nombredispo,String:tipodispo-> addDispositivobbdd()
+     *
+     * @param nombredispo Nombre del dispositivo que se va a añadir
+     * @param tipodispo EL tipo de dispositivo que se va a añadir
+     *
+     */
     private void addDispositivobbdd(String nombredispo,String tipodispo)
     {
         //HACE EL INSERT EN LA BBDD
@@ -123,11 +137,13 @@ public class VincularDispo extends AppCompatActivity {
     }
 
 
-    //------------------------------------------------
-    //  View: view -->
-    //  guardardispositivovinculado()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Se accede al Area del usuario
+     *
+     * View:view -> guardardispositivovinculado()
+     *
+     *
+     */
     public void guardardispositivovinculado(View view)
     {
         if(!preferencias.getString("dispositivovinculado", "nohay").equals("nohay")) //si ha encontrado algún dispositivo
@@ -143,11 +159,12 @@ public class VincularDispo extends AppCompatActivity {
     }
 
 
-    //------------------------------------------------
-    //  View: view -->
-    //  logoutbutton()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Al pulsar este botón el usuario se desconectará de la sesión
+     *
+     * View-> logoutbutton()
+     *
+     */
 
     public void logoutbutton(View view)
     {

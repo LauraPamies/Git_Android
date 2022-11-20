@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
+//Esta clase creará las conexiones de métodos de android con el servidor
 public class Logica {
 
     String ip = "172.20.10.2";
@@ -28,11 +29,13 @@ public class Logica {
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
 
-    //------------------------------------------------
-    //  valorbeacon: int -->
-    //  editPerfil()
-    //
-    //------------------------------------------------
+
+    /*
+     * @brief Crea la conexión con el método del servidor para insertar datos
+     * int:valorbeacon -> enviardatosreal()
+     *
+     * @param valorbeacon valor del beacon que será enviado al servidor
+     */
     public void enviardatosreal(int valorbeacon)
     {
 
@@ -79,11 +82,17 @@ public class Logica {
 
 
 
-    //------------------------------------------------
-    //  usuario: String, nombre: String, mail: String, telefono: String -->
-    //  editPerfil()
-    //  --> JSONObject
-    //------------------------------------------------
+
+    /*
+     * @brief Crea la conexión con el método del servidor para editar el perfil
+     *
+     * String:usuario,String:nombre,String:mail,String:telefono -> editPerfil()
+     *
+     * @param usuario El usuario que actualiza el perfil
+     * @param nombre El nombre del usuario que se va a actualizar en el perfil
+     * @param mail El mail del usuario que se va a actualizar en el perfil
+     * @param nombre El telefono del usuario que se va a actualizar en el perfil
+     */
     public void editPerfil(String usuario,String nombre, String mail, String telefono)
     {
         Log.d("HAENTRADO", "HA ENTRADO");
@@ -124,6 +133,15 @@ public class Logica {
     }
 
 
+    /*
+     * @brief Crea la conexión con el método del servidor para insertar dispositivo
+     *
+     * String:usuario,String:tiposensor,String:nombresensor -> insertarDispo()
+     *
+     * @param usuario El usuario al cual se le inserta el sensor
+     * @param tiposensor El tipo de sensor que se va a insertar
+     * @param nombresensor El nombre del sensor que se va a insertar
+     */
     public void insertarDispo(String usuario,String tiposensor, String nombresensor)
     {
         Log.d("HAENTRADO", "HA ENTRADO");

@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//Esta clase realizará el cambio de contraseña, accediendo a métodos del servidor.
 public class CambiarContra extends AppCompatActivity {
 
     String ip = "172.20.10.2";
@@ -56,11 +57,13 @@ public class CambiarContra extends AppCompatActivity {
     }
 
 
-    //------------------------------------------------
-    //  View: view -->
-    //  logoutbutton()
-    //
-    //------------------------------------------------
+
+   /*
+     * @brief Al pulsar este botón el usuario se desconectará de la sesión
+     *
+     * View-> logoutbutton()
+     *
+     */
     public void logoutbutton(View view)
     {
         editorpreferencias.putBoolean("sesionrecordada",false);
@@ -74,11 +77,16 @@ public class CambiarContra extends AppCompatActivity {
 
     }
 
-    //------------------------------------------------
-    //  View: view -->
-    //  botonguardar()
-    //
-    //------------------------------------------------
+
+
+    /*
+     * @brief Con este botón se guardarán los cambios realizados. Accede al método del servidor que guarda la contraseña.
+           Si va bien la contraseña se cambiará, si hay algún fallo será notificado al usuario mediante un Toast
+     *
+     * View-> botonguardar()
+     *
+     * @verbatim puede lanzar una excepcion de tipo Exception
+     */
     public void botonguardar(View view)throws JSONException
     {
         oldpass = editcontraantigua.getText().toString();

@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
+
+//Esta clase realizará el cambio de datos de perfil del usaurio, accediendo a métodos del servidor.
 public class EditUserActivity extends AppCompatActivity {
 
     EditText editnombre, editmail,edittelefono;
@@ -50,22 +52,25 @@ public class EditUserActivity extends AppCompatActivity {
     }
 
 
-    //------------------------------------------------
-    //  View: view -->
-    //  botoncambiarcontra()
-    //
-    //------------------------------------------------
+    /*
+     * @brief Al pulsar este botón el usuario será enviado a la pantalla de cambiar contraseña
+     *
+     * View-> botoncambiarcontra()
+     *
+     */
     public void botoncambiarcontra(View view)
     {
         startActivity(new Intent(this, CambiarContra.class));
 
     }
 
-    //------------------------------------------------
-    //  View: view -->
-    //  botonguardar()
-    //
-    //------------------------------------------------
+    /*
+    * @brief Con este botón se guardarán los cambios realizados. Accede al método del servidor que edita los datos del usuario.
+    *
+    * View-> botonguardar()
+    *
+    * @verbatim puede lanzar una excepcion de tipo Exception
+    */
     public void botonguardar(View view)throws JSONException
     {
 
