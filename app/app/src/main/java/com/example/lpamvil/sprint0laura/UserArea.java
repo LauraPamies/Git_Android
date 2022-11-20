@@ -1,10 +1,14 @@
 package com.example.lpamvil.sprint0laura;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -27,11 +31,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -41,6 +50,11 @@ public class UserArea extends AppCompatActivity {
     private final static int NOTIFICACION_ID = 0;
     // It allows to prevent the notification from being created more than once when it's already created
     boolean notificacion_unica = false;
+    //----------------------------------------------------------------------------MENUUUUUUUUUUUUUUUUUUUUUUUU
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle drawerToggle;
+    //----------------------------------------------------------------------------MENUUUUUUUUUUUUUUUUUUUUUUUU
 
     Button botonbluet;
 
@@ -281,12 +295,64 @@ public class UserArea extends AppCompatActivity {
 
         }
     } // ()
-    
+    //-------------------------------------------------------------------------------------------MENUUUUUUUUUUUUUUUUUUUUUUUUUUU
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(drawerToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    //-------------------------------------------------------------------------------------------MENUUUUUUUUUUUUUUUUUUUUUUUUUUU
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
         Log.d("--", " onCreate(): empieza ");
+        //-------------------------------------------------------------------------------------------MENUUUUUUUUUUUUUUUUUUUUUUUUUUU
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.contact:
+                    {
+                        Toast.makeText(UserArea.this, "Selecionado contactanos", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case R.id.edit:
+                    {
+                        Toast.makeText(UserArea.this, "Selecionado edit", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    }
+                    case R.id.vincul:
+                    {
+                        Toast.makeText(UserArea.this, "Selecionado vincul", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    }
+                    case R.id.gasnoc:
+                    {
+                        Toast.makeText(UserArea.this, "Selecionado gasnoc", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    }
+
+
+                }
+                return false;
+            }
+        });
+        //-------------------------------------------------------------------------------------------MENUUUUUUUUUUUUUUUUUUUUUUUUUUU
 
         //botonbluet = findViewById(R.id.botonbluet);
 
@@ -381,6 +447,15 @@ public class UserArea extends AppCompatActivity {
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
     }
 
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+        {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
 
-
+        }
+    }
 }
