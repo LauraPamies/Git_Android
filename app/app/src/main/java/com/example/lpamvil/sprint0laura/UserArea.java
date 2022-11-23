@@ -41,6 +41,8 @@ public class UserArea extends AppCompatActivity {
     private final static int NOTIFICACION_ID = 0;
     // It allows to prevent the notification from being created more than once when it's already created
     boolean notificacion_unica = false;
+    boolean detectado = false;
+    int contador = 0;
 
     Button botonbluet;
 
@@ -164,23 +166,28 @@ public class UserArea extends AppCompatActivity {
                 Log.d(ETIQUETA_LOG, "  buscarEsteDispositivoBTLE(): onScanResult() ");
                 //Log.d(ETIQUETA_LOG, " dispositivo detectado = " + bluetoothDevice2.getName());
                 Log.d("DISPOSITIVO BUSCADO",dispositivoBuscado);
+                contador++;
 
-
-                if(resultado.getDevice().getName() != null && resultado.getDevice().getName().equals(dispositivoBuscado)){
-                    mostrarInformacionDispositivoBTLE( resultado );
-                    notificacion_unica = false;
-                    textodispoconectado.setText("Dispositivo conectado correctamente\nya puedes comenzar a escanear");
-
+                if(contador < 150){
+                    if(resultado.getDevice().getName() != null && resultado.getDevice().getName().equals(dispositivoBuscado)){
+                        mostrarInformacionDispositivoBTLE( resultado );
+                        notificacion_unica = false;
+                        textodispoconectado.setText("Dispositivo conectado correctamente\nya puedes comenzar a escanear");
+                        String distancia = estimarDistancia(resultado);
+                        TextView dist = findViewById(R.id.distancia);
+                        detectado = true;
+                        dist.setText("Distancia al sensor: " + distancia);
+                    }
                 } else{
-                    if(notificacion_unica == false){
+                    if(detectado == false){
 
                         textodispoconectado.setText("Dispositivo no conectado");
                         Log.d(ETIQUETA_LOG, "No se ha encontrado el dispositivo");
-                        createNotificationChannel();
-                        createNotification();
+                        //createNotificationChannel();
+                        //createNotification();
                         notificacion_unica = true;
                     }
-
+                    detectado = false;
 
                 }
 
@@ -379,6 +386,19 @@ public class UserArea extends AppCompatActivity {
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
+    }
+
+    private String estimarDistancia(ScanResult resultado){
+        int dist = resultado.getRssi();
+        //Toast.makeText(this, String.valueOf(dist), Toast.LENGTH_SHORT).show();
+        Log.d("DISTANCIA", String.valueOf(dist));
+        if(dist > -75){
+            return "Cerca";
+        } else if(dist < -78 && dist > -90){
+            return "Media distancia";
+        } else{
+            return "Lejos";
+        }
     }
 
 
