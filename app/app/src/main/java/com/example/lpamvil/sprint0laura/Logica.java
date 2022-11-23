@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class Logica {
 
-    String ip = "192.168.43.15";
+    String ip = "172.20.10.2";
     Date fechaactual = new Date();
 
     static JSONObject jobject = new JSONObject();
