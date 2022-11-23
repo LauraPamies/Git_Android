@@ -33,7 +33,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.StringRequestListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 
 //En esta clase estará la zona del usuario.
@@ -51,8 +65,8 @@ public class UserArea extends AppCompatActivity {
 
     String nombredispo;
 
-    TextView iddispositivouser;
-    TextView textodispoconectado , tiposensor;
+    TextView iddispositivouser, textocalidadaire;
+    TextView textodispoconectado , tiposensor, colorestimacionaire;
 
     public String valorbeacon = null;
 
@@ -62,6 +76,8 @@ public class UserArea extends AppCompatActivity {
 
     private EditText valormedicion;
     private EditText valorid;
+
+    String ip = "192.168.0.14";
 
 
     SharedPreferences preferencias;
@@ -305,21 +321,24 @@ public class UserArea extends AppCompatActivity {
         setContentView(R.layout.activity_user_area);
         Log.d("--", " onCreate(): empieza ");
 
-        //botonbluet = findViewById(R.id.botonbluet);
 
         //Creación de preferencias
         preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
         editorpreferencias = preferencias.edit();
 
-        //nombreUsuarioActivity = (TextView) findViewById(R.id.nombreUsuarioActivity);
+
         Log.d("userarea","entra en la sesion activa");
 
         textodispoconectado = findViewById(R.id.textodispoconectado);
         tiposensor = findViewById(R.id.tiposensor);
 
         iddispositivouser = findViewById(R.id.iddispositivouser);
+        textocalidadaire = findViewById(R.id.textocalidadaire);
         nombredispo = preferencias.getString("dispositivovinculado","nohay");
         iddispositivouser.setText("Id del dispositivo: " + nombredispo);
+
+        colorestimacionaire = findViewById(R.id.colorestimacionaire);
+
 
         if (!nombredispo.equals("nohay"))
         {
@@ -331,7 +350,115 @@ public class UserArea extends AppCompatActivity {
 
         Log.d("--", " onCreate(): termina ");
 
+
+        String idSensor = preferencias.getString("idSensor","");
+
+
+        JSONObject jsonObject = new JSONObject();
+
+        //Se crea la fecha actual y la fecha de ayer
+        LocalDate date = null;
+        LocalDate DateAnterior = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            date = LocalDate.now();
+            DateAnterior = date.plusDays(-1);
+            editorpreferencias.putString("DateAnterior",DateAnterior.toString());
+            editorpreferencias.apply();
+
+        }
+
+
+        Log.d("FECHA ACTUAL",date.toString());
+        Log.d("FECHA DE AYER",DateAnterior.toString());
+
+
+
+        try{
+            jsonObject.put("date",DateAnterior);
+            jsonObject.put("id_sensor",idSensor);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //El método de la api para hacer el post para hacer la media de las medidas
+        AndroidNetworking.post("http://" + ip + ":3000/average_measurements") //Poner aqui IP propia para enviar al servidor en local
+                .addJSONObjectBody(jsonObject) // posting json
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        // do anything with response
+                        Log.d("RESPUESTA AVERAGE", "va AVERAGE MEDICIONES");
+                        Log.d("RESPUESTA AVERAGE", response);
+                        float f_response = 0;
+                        DecimalFormat formato1 = new DecimalFormat("#.00");
+                        if (!response.equals("null"))
+                        {
+                            f_response = Float.parseFloat(response);
+
+                        }
+                        String fecha = preferencias.getString("DateAnterior","");
+
+                        //HAY QUE PONER IFs PARA ASIGNAR TEXTOS DEPENDE DE LOS UMBRALES
+                        if (0<f_response && f_response<=40)
+                        {
+
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es buena: " + formato1.format(f_response));
+                            colorestimacionaire.setVisibility(View.VISIBLE);
+                            colorestimacionaire.setBackgroundColor(Color.parseColor("#65DF48"));
+
+                        }else  if (f_response > 40 && f_response <= 120)
+                        {
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es normal: " + formato1.format(f_response));
+                            colorestimacionaire.setVisibility(View.VISIBLE);
+                            colorestimacionaire.setBackgroundColor(Color.parseColor("#EFEA56"));
+
+
+                        }else if (f_response >120 && f_response <= 180){
+
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es mala: " + formato1.format(f_response));
+                            colorestimacionaire.setVisibility(View.VISIBLE);
+                            colorestimacionaire.setBackgroundColor(Color.parseColor("#ED8128"));
+
+
+                        }else if (f_response > 180)
+                        {
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es muy mala: " + formato1.format(f_response));
+                            colorestimacionaire.setVisibility(View.VISIBLE);
+
+                            colorestimacionaire.setBackgroundColor(Color.parseColor("#E21212"));
+
+
+                        }else {
+
+                            textocalidadaire.setText("No hay medidas registradas de ayer.\n Fecha: " + fecha);
+                            colorestimacionaire.setVisibility(View.INVISIBLE);
+
+                        }
+
+
+
+                    }
+
+
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.d("RESPUESTA AVERAGE ERROR", error.toString());
+
+                    }
+
+                });
+
+
+
     }
+    
+         
 
 
     /*
@@ -354,6 +481,8 @@ public class UserArea extends AppCompatActivity {
 
 
     }
+
+
 
 
 
