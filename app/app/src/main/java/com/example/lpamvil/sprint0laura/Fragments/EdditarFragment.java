@@ -29,10 +29,11 @@ public class EdditarFragment extends Fragment {
 
 
     //----------------------------------------EDITARRRRRRR---------------------
-    EditText editnombre, editmail,edittelefono; //como = findViewById(R.id.correoInfo);
-    String usuario;
-    SharedPreferences preferencias;
-    SharedPreferences.Editor editorpreferencias;
+    public EditText editnombre, editmail, edittelefono; //como = findViewById(R.id.correoInfo);
+
+    public String usuario;
+    public SharedPreferences preferencias;
+    public SharedPreferences.Editor editorpreferencias;
     //----------------------------------------EDITARRRRRRR---------------------
 
 
@@ -46,6 +47,7 @@ public class EdditarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //----------------------------------------EDITARRRRRRR---------------------
+        // IGNA  public TextView nombreInfo; //= findViewById(R.id.nombreInfo);
 
         editnombre = binding.editnombre;
         editmail = binding.editmail;
@@ -92,46 +94,24 @@ public class EdditarFragment extends Fragment {
 
 /*package com.example.proyectoiot.ui.gallery;
 
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.proyectoiot.AplicacionActivity;
-import com.example.proyectoiot.IniciarSesionActivity;
-import com.example.proyectoiot.R;
-import com.example.proyectoiot.UploadProfilePicActivity;
-import com.example.proyectoiot.databinding.FragmentGalleryBinding;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
 public class GalleryFragment extends Fragment {
 
-
+    private static final int RESULT_OK = 0;
+    private FragmentGalleryBinding binding;
+    public TextView nombreInfo; //= findViewById(R.id.nombreInfo);
+    public TextView correoInfo; //= findViewById(R.id.correoInfo);
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
+    ImageView fotoUser;
+    private static final int  PICK_IMAGE_REQUEST = 1;
+    private Uri uriImage;
+    FirebaseAuth authProfile;
+    private StorageReference storageReference;
+    private FirebaseUser firebaseUser;
+    Button update;
     //-----------------------------------------------------------------------------------------------
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
