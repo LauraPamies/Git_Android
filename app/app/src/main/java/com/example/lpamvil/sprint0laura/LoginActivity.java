@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, pass;
     CheckBox recordarsesion;
 
-    String ip = "192.168.1.166";
+    String ip = "192.168.43.15";
 
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (revisarSesion()) //si la sesion estaba recordada
         {
-            startActivity(new Intent(this, UserArea.class));
+            startActivity(new Intent(this, FragmentMainActivity.class));
         }
 
 
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Log.d("APLICA LAS PREFERENCIAS", "APLICA LAS PREFERENCIAS DEL SENSOR");
 
-                            startActivity(new Intent(LoginActivity.this, UserArea.class));
+                            startActivity(new Intent(LoginActivity.this, FragmentMainActivity.class));
 
 
                         } catch (JSONException e) {

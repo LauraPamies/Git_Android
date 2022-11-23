@@ -7,6 +7,7 @@
         <domain includeSubdomains="true">192.168.43.79</domain>
         <domain includeSubdomains="true">172.20.10.2</domain>
         <domain includeSubdomains="true">192.168.1.166</domain>
+        <domain includeSubdomains="true">192.168.43.15</domain>
 
         <!--CREAR OTRO DOMINIO CON LA IP DEL ORDENADOR DONDE SE VAN A ENVIAR LOS POST DEL SERVIDOR-->
     </domain-config>

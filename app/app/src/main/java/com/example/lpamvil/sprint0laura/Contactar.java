@@ -4,6 +4,7 @@ package com.example.lpamvil.sprint0laura;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -94,7 +95,13 @@ public class Contactar extends AppCompatActivity{
 
 
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, FragmentMainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 }
 

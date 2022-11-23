@@ -160,4 +160,11 @@ public class VincularDispo extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, FragmentMainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

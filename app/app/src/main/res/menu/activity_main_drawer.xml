@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_contactanos"
+            android:icon="@drawable/ic_baseline_mail_outline_24"
+            android:title="Contactanos" />
+        <item
+            android:id="@+id/nav_editar"
+            android:icon="@drawable/ic_baseline_edit_24"
+            android:title="Editar perfil" />
+        <item
+            android:id="@+id/nav_vincular"
+            android:icon="@drawable/ic_baseline_battery_0_bar_24"
+            android:title="Vincular Dispositivo" />
+
+        <item
+            android:id="@+id/nav_gases"
+            android:icon="@drawable/datos"
+            android:title="Gases nocivos" />
+    </group>
+</menu>

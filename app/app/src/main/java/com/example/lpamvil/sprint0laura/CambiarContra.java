@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 public class CambiarContra extends AppCompatActivity {
 
-    String ip = "192.168.1.166";
+    String ip = "192.168.43.15";
 
 
     EditText editcontraantigua, editcontranueva, editcontranuevarepetir;

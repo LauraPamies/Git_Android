@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.lpamvil.sprint0laura.Fragments.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_editar"
+        android:name="com.example.lpamvil.sprint0laura.Fragments.EdditarFragment"
+        android:label="Editar Perfil"
+        tools:layout="@layout/fragment_edditar" />
+
+
+    <fragment
+        android:id="@+id/nav_contactanos"
+        android:name="com.example.lpamvil.sprint0laura.Fragments.ContactanosFragment"
+        android:label="Contactanos"
+        tools:layout="@layout/fragment_contactanos" />
+    <fragment
+        android:id="@+id/nav_vincular"
+        android:name="com.example.lpamvil.sprint0laura.Fragments.VincularFragment"
+        android:label="Vincular Dispositivo"
+        tools:layout="@layout/fragment_vincular" />
+
+    <fragment
+        android:id="@+id/nav_gases"
+        android:name="com.example.lpamvil.sprint0laura.Fragments.GasesFragment"
+        android:label="Gases nocivos"
+        tools:layout="@layout/fragment_gases" />
+</navigation>

@@ -15,9 +15,7 @@ import org.json.JSONException;
 public class EditUserActivity extends AppCompatActivity {
 
     EditText editnombre, editmail,edittelefono;
-
     String usuario;
-
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
 
@@ -85,5 +83,13 @@ public class EditUserActivity extends AppCompatActivity {
         startActivity(new Intent(this, UserArea.class));
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, FragmentMainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
