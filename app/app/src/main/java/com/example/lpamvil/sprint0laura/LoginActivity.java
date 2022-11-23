@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -20,20 +23,23 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.ParsedRequestListener;
+import com.example.lpamvil.sprint0laura.databinding.FragmentVincularBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText user, pass;
     CheckBox recordarsesion;
-
     String ip = "172.20.10.2";
-
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
+    private TextView _btn_link; //link
+    String _url = "https://es.wikipedia.org/wiki/Aliasing";//link
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,16 @@ public class LoginActivity extends AppCompatActivity {
         //Guarda las preferencias compartidas en unas llamadas "sesiones"
         preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
         editorpreferencias = preferencias.edit();
+
+        _btn_link = findViewById(R.id.btn_link);//link
+        _btn_link.setOnClickListener(new View.OnClickListener() {//link
+            @Override//link
+            public void onClick(View v) {
+                Uri _link = Uri.parse(_url);
+                Intent i = new Intent(Intent.ACTION_VIEW,_link);
+                startActivity(i);
+            }
+        });
 
         if (revisarSesion()) //si la sesion estaba recordada
         {
@@ -137,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                         editorpreferencias.putString("idUsuario", "");
 
                         editorpreferencias.apply();
-                        startActivity(new Intent(LoginActivity.this, AnyadirDispositivo.class));
+                        startActivity(new Intent(LoginActivity.this, FragmentVincularBinding.class));
 
 
                     }

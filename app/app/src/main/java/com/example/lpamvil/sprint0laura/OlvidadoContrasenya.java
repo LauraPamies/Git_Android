@@ -1,48 +1,29 @@
 package com.example.lpamvil.sprint0laura;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import java.util.Properties;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import android.os.Bundle;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import javax.mail.BodyPart;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-/*
- * Llama a la tarea del envío de correo que se ejecuta en el hilo en segundo plano desde el hilo principal
- */
-public class Contactar extends AppCompatActivity{
+public class OlvidadoContrasenya extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contactar);
+        setContentView(R.layout.activity_olvidado_correo);
 
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button enviar_correo = (Button) findViewById(R.id.button_send_email);
         enviar_correo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CorreoSegundoPlano().execute(); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
+                new OlvidadoContrasenya.CorreoSegundoPlano().execute(); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
             }
         });
     }
@@ -50,11 +31,15 @@ public class Contactar extends AppCompatActivity{
     /*
      * Recoge los datos introducidos por el usuario y los manda por correo desde un hilo en segundo plano
      */
-    private class CorreoSegundoPlano extends AsyncTask <String, Float, Integer> {
+    private class CorreoSegundoPlano extends AsyncTask<String, Float, Integer> {
 
         @Override
         protected Integer doInBackground(String... variableNoUsada) {
             Mail m = new Mail("trackerpollutiongti@gmail.com", "trackerpollution000");
+
+
+
+
 
             EditText campo_correo = (EditText) findViewById(R.id.correo);
             EditText campo_asunto = (EditText) findViewById(R.id.asunto);
@@ -63,25 +48,25 @@ public class Contactar extends AppCompatActivity{
             String motivo = campo_motivo.getText().toString();
             String asunto = campo_asunto.getText().toString();
 
-            String[] toArr = {"trackerpollutiongti@gmail.com"};
+            String[] toArr = {"alvaromusica09@gmail.com"};
             m.setTo(toArr);
             m.setFrom("trackerpollutiongti@gmail.com");
             m.setSubject(asunto);
-            m.setBody(correo, motivo);
+            m.setBody(correo, motivo);//meto la contraseña
             Log.d("MailApp", "Estoy dentro del mensaje");
 
             try {
                 Log.d("MailApp", "Estoy dentro del try");
                 if(m.send()) {
-                    Contactar.this.runOnUiThread(new Runnable() {
+                    OlvidadoContrasenya.this.runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(Contactar.this, "El correo ha sido enviado satisfactoreamente", Toast.LENGTH_LONG).show();
+                            Toast.makeText(OlvidadoContrasenya.this, "El correo ha sido enviado satisfactoreamente", Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
-                    Contactar.this.runOnUiThread(new Runnable() {
+                    OlvidadoContrasenya.this.runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(Contactar.this, "Error al mandar el correo: hay campos vacíos", Toast.LENGTH_LONG).show();
+                            Toast.makeText(OlvidadoContrasenya.this, "Error al mandar el correo: hay campos vacíos", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -104,5 +89,3 @@ public class Contactar extends AppCompatActivity{
     }
 
 }
-
-

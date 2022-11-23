@@ -26,6 +26,13 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".OlvidadoContrasenya"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".FragmentMainActivity"
             android:exported="false"
             android:label="@string/title_activity_fragment_main"

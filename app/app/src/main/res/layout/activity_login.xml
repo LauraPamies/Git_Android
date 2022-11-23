@@ -85,8 +85,9 @@
             android:id="@+id/recordarsesioncheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="32dp"
             android:text="Recuerdame"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -106,6 +107,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittextpass"
             app:layout_constraintVertical_bias="0.493" />
+
+        <TextView
+            android:id="@+id/btn_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="He olvidado mi constraseña"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recordarsesioncheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
