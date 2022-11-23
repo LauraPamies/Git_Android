@@ -139,11 +139,15 @@ public class FragmentMainActivity extends AppCompatActivity {
     //------------------------------------------------EDITAR---------------------------------------------------
 
 
-    //------------------------------------------------
-    //  View: view -->
-    //  botonguardar()
-    //
-    //------------------------------------------------
+    public void botonguardarFragment(View view)throws JSONException
+    {
+
+
+
+        startActivity(new Intent(this, FragmentMainActivity.class));
+
+
+    }
 
     //------------------------------------------------EDITAR---------------------------------------------------
 
