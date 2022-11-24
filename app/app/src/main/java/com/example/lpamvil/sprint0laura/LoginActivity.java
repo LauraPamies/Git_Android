@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private TextView _btn_link; //link
-    String _url = "http://localhost:4000/#/recover_pass";//link
+    String _url = "http://172.20.10.2:4000/#/recover_pass";//link
 
 
     @Override
