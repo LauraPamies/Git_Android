@@ -28,6 +28,8 @@ public class FragmentMainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityFragmentMainBinding binding;
 
+    SharedPreferences preferencias;
+    SharedPreferences.Editor editorpreferencias;
 
     //------------------------------------------------EDITAR---------------------------------------------------
 /*    EditText editnombre, editmail,edittelefono;
@@ -118,14 +120,27 @@ public class FragmentMainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void botonIrGasesActivity(View view){
-        Intent i = new Intent(this, EditUserActivity.class);
+
+    public void botonIrUserArea(View view){
+        Intent i = new Intent(this, UserArea.class);
         startActivity(i);
     }
-/*    public void botonIrLogout(View view){
-        Intent i = new Intent(this, EditUserActivity.class);
+        public void logoutbutton(View view){//FALSO
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
+    }
+/*   public void logoutbutton(View view)
+    {
+
+        editorpreferencias.putBoolean("sesionrecordada",false);
+        editorpreferencias.putString("dispositivovinculado","nohay");
+        editorpreferencias.apply();
+        Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(FragmentMainActivity.this, LoginActivity.class));
+
+
     }*/
+
 
     @Override
     public void onBackPressed() {

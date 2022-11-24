@@ -8,17 +8,74 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
-        <Button
-            android:id="@+id/button5"
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="414dp"
+            android:layout_height="218dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/fqvrypz4g5jr7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="410dp"
+            android:layout_height="346dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/caminoss"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+        <TextView
+            android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="botonIrGasesActivity"
-            android:text="Ir a gases"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/quicksandmedium"
+            android:text="Gases Nocivos"
+            android:textColor="#000000"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.528"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView11" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="385dp"
+            android:layout_height="45dp"
+            android:fontFamily="@font/quicksandmedium"
+            android:text="Hoy en dia simplemente salir a la calle puede suponer un problema para nuestra salud."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView13" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="385dp"
+            android:layout_height="93dp"
+            android:fontFamily="@font/quicksandmedium"
+            android:text="Respirar el ozono malo puede ser dañino. Provoca tos, irritación en la garganta, empeoramiento de afecciones como asma, bronquitis y enfisema y hasta daños pulmonares permanentes, si la exposición a éste es habitual."
+            app:layout_constraintEnd_toEndOf="@+id/textView12"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="460dp"
+            android:layout_height="174dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/hospitalizadas"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
