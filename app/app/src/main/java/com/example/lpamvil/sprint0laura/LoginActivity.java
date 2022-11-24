@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, pass;
     CheckBox recordarsesion;
 
-    String ip = "192.168.0.14";
+    String ip = "172.20.10.2";
 
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;

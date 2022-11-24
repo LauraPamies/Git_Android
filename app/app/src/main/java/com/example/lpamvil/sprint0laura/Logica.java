@@ -19,7 +19,7 @@ import java.util.Date;
 //Esta clase creará las conexiones de métodos de android con el servidor
 public class Logica {
 
-    String ip = "192.168.0.14";
+    String ip = "172.20.10.2";
     Date fechaactual = new Date();
 
     static JSONObject jobject = new JSONObject();
