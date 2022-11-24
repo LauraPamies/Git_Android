@@ -14,7 +14,7 @@
         android:background="@color/green_basic">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/botonmenu_userarea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -31,7 +31,7 @@
             android:layout_height="53dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
-            app:layout_constraintStart_toEndOf="@+id/imageButton2"
+            app:layout_constraintStart_toEndOf="@+id/botonmenu_userarea"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.68"
             app:srcCompat="@drawable/icono1" />

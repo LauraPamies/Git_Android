@@ -1,6 +1,7 @@
 package com.example.lpamvil.sprint0laura;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -28,8 +29,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LayoutAnimationController;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,7 +67,11 @@ public class UserArea extends AppCompatActivity {
     boolean detectado = false;
     int contador = 0;
 
-    Button botonbluet;
+    ImageButton botonmenu_userarea;
+
+    boolean menudesplegado=false;
+
+    private ConstraintLayout layoutanimado;
 
     String nombredispo;
 
@@ -314,7 +324,76 @@ public class UserArea extends AppCompatActivity {
 
         }
     } // ()
-    
+
+
+    public void clickbotonmenu(View view)
+    {
+        if (!menudesplegado) //no está desplegado el menu
+        {
+            animar("aparecer");
+            layoutanimado.setVisibility(View.VISIBLE);
+            menudesplegado = true;
+        }else { //está desplegado
+            animar("desaparecer");
+            layoutanimado.setVisibility(View.GONE);
+            menudesplegado = false;
+        }
+    }
+
+    private void animar (String mostrar)
+    {
+        AnimationSet set = new AnimationSet(true);
+        Animation animation = null;
+        if (mostrar.equals("aparecer"))
+        {
+            animation = new TranslateAnimation(
+                    Animation.RELATIVE_TO_SELF,0.0f,
+                    Animation.RELATIVE_TO_SELF,0.0f,
+                    Animation.RELATIVE_TO_SELF,0.0f,
+                    Animation.RELATIVE_TO_SELF,0.0f
+            );
+        }
+        if (mostrar.equals("desaparecer"))
+        {
+            animation = new TranslateAnimation(
+                    Animation.RELATIVE_TO_SELF,0.1f,
+                    Animation.RELATIVE_TO_SELF,0.1f,
+                    Animation.RELATIVE_TO_SELF,0.0f,
+                    Animation.RELATIVE_TO_SELF,0.0f
+            );
+        }
+
+        set.addAnimation(animation);
+        LayoutAnimationController controller = new LayoutAnimationController(set,0.20f);
+        layoutanimado.setLayoutAnimation(controller);
+        layoutanimado.startAnimation(animation);
+    }
+
+
+    public void botoncontactanos(View view)
+    {
+        startActivity(new Intent(this, Contactar.class));
+
+    }
+
+    public void editarperfil(View view)
+    {
+        startActivity(new Intent(this, EditUserActivity.class));
+
+    }
+
+    public void vinculardispo(View view)
+    {
+        startActivity(new Intent(this, VincularDispo.class));
+
+    }
+
+    public void gasesnocivos(View view)
+    {
+        //startActivity(new Intent(this, gases.class));
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -331,6 +410,9 @@ public class UserArea extends AppCompatActivity {
 
         textodispoconectado = findViewById(R.id.textodispoconectado);
         tiposensor = findViewById(R.id.tiposensor);
+
+        botonmenu_userarea = findViewById(R.id.botonmenu_userarea);
+        layoutanimado = (ConstraintLayout) findViewById(R.id.layoutanimado);
 
         iddispositivouser = findViewById(R.id.iddispositivouser);
         textocalidadaire = findViewById(R.id.textocalidadaire);
