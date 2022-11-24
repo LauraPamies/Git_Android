@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EditUserActivity">
+    android:layout_height="match_parent">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,115 +52,79 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="347dp"
-        android:layout_height="379dp"
-        android:layout_marginTop="116dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/quicksandmedium"
-            android:text="Correo"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/correo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginBottom="30dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textnuevacontra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
-            android:fontFamily="@font/quicksandmedium"
-            android:text="Asunto"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/asunto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginBottom="30dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="65dp"
-            android:fontFamily="@font/quicksandmedium"
-            android:text="Motivo"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/motivo"
-            android:layout_width="255dp"
-            android:layout_height="122dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="48dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/edit_text_border"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button_send_email"
+    <ImageView
+        android:id="@+id/imageView111"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/boton_redondo"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="Enviar"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="212dp"
+        android:src="@drawable/fqvrypz4g5jr7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <ImageView
+        android:id="@+id/imageView131"
+        android:layout_width="wrap_content"
+        android:layout_height="346dp"
+        android:src="@drawable/caminoss"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView111" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textView111"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Consulta"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:fontFamily="@font/quicksandmedium"
+        android:text="Gases Nocivos"
+        android:textColor="#000000"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:background="#020000"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#020000"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/textView121"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/quicksandmedium"
+        android:text="Hoy en dia simplemente salir a la calle puede suponer un problema para nuestra salud."
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toTopOf="@+id/imageView131" />
+
+    <TextView
+        android:id="@+id/textView151"
+        android:layout_width="wrap_content"
+        android:layout_height="93dp"
+        android:fontFamily="@font/quicksandmedium"
+        android:text="Respirar el ozono malo puede ser dañino. Provoca tos, irritación en la garganta, empeoramiento de afecciones como asma, bronquitis y enfisema y hasta daños pulmonares permanentes, si la exposición a éste es habitual."
+        app:layout_constraintEnd_toEndOf="@+id/textView121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView121" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="261dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView131"
+        app:srcCompat="@drawable/hopi" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="93dp"
+        android:fontFamily="@font/quicksandmedium"
+        android:text="Resulta difícil establecer una concentración fija a partir de la cual el O3 causa perjuicios en la salud, ya que éstos son dependientes de un gran número de factores. No obstante, la Directiva 2002/3/CE, transpuesta a nuestra Legislación por el Real Decreto 1796/2003."
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/textView121"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView131" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutanimado"
@@ -305,7 +268,5 @@
             app:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -196,7 +196,7 @@ public class UserArea extends AppCompatActivity {
                 Log.d("DISPOSITIVO BUSCADO",dispositivoBuscado);
                 contador++;
 
-                if(contador < 150){
+                if(contador < 500){
                     if(resultado.getDevice().getName() != null && resultado.getDevice().getName().equals(dispositivoBuscado)){
                         mostrarInformacionDispositivoBTLE( resultado );
                         notificacion_unica = false;
@@ -332,10 +332,12 @@ public class UserArea extends AppCompatActivity {
         {
             animar("aparecer");
             layoutanimado.setVisibility(View.VISIBLE);
+            botonmenu_userarea.setImageResource(R.drawable.ic_baseline_close_40);
             menudesplegado = true;
         }else { //está desplegado
             animar("desaparecer");
             layoutanimado.setVisibility(View.GONE);
+            botonmenu_userarea.setImageResource(R.drawable.menu);
             menudesplegado = false;
         }
     }
@@ -376,6 +378,12 @@ public class UserArea extends AppCompatActivity {
 
     }
 
+    public void botonuserarea(View view)
+    {
+        startActivity(new Intent(this, UserArea.class));
+
+    }
+
     public void editarperfil(View view)
     {
         startActivity(new Intent(this, EditUserActivity.class));
@@ -390,7 +398,7 @@ public class UserArea extends AppCompatActivity {
 
     public void gasesnocivos(View view)
     {
-        //startActivity(new Intent(this, gases.class));
+        startActivity(new Intent(this, activity_gases.class));
 
     }
 
