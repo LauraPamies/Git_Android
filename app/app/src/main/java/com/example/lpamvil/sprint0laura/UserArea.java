@@ -87,7 +87,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "192.168.0.14";
+    String ip = "172.20.10.2";
 
 
     SharedPreferences preferencias;
@@ -622,9 +622,9 @@ public class UserArea extends AppCompatActivity {
         int dist = resultado.getRssi();
         //Toast.makeText(this, String.valueOf(dist), Toast.LENGTH_SHORT).show();
         Log.d("DISTANCIA", String.valueOf(dist));
-        if(dist > -75){
+        if(dist > -73){
             return "Cerca";
-        } else if(dist < -78 && dist > -90){
+        } else if(dist < -73 && dist > -90){
             return "Media distancia";
         } else{
             return "Lejos";

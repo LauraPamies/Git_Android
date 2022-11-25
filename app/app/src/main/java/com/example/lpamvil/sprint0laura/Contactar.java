@@ -158,7 +158,7 @@ public class Contactar extends AppCompatActivity{
 
         @Override
         protected Integer doInBackground(String... variableNoUsada) {
-            Mail m = new Mail("ivandiscobolo@gmail.com", "");
+            Mail m = new Mail("trackerpollutiongti@gmail.com", "liba fqga fujp kfaj");
 
             EditText campo_correo = (EditText) findViewById(R.id.correo);
             EditText campo_asunto = (EditText) findViewById(R.id.asunto);
@@ -167,9 +167,9 @@ public class Contactar extends AppCompatActivity{
             String motivo = campo_motivo.getText().toString();
             String asunto = campo_asunto.getText().toString();
 
-            String[] toArr = {"ivandiscobolo@gmail.com"};
+            String[] toArr = {"trackerpollutiongti@gmail.com"};
             m.setTo(toArr);
-            m.setFrom("ivandiscobolo@gmail.com");
+            m.setFrom("trackerpollutiongti@gmail.com");
             m.setSubject(asunto);
             m.setBody(correo, motivo);
             Log.d("MailApp", "Estoy dentro del mensaje");

@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/quicksandmedium"
-        android:text="Calidad del aire a dia "
+        android:text="No hay mediciones con este sensor"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

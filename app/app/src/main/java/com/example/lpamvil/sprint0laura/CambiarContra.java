@@ -214,7 +214,7 @@ public class CambiarContra extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            AndroidNetworking.post("http://" + ip + ":3000/change_password")
+            AndroidNetworking.post("http://" + ip + ":3000/update_password")
                     .addJSONObjectBody(jsonObject) // posting json
                     .setTag("test")
                     .setPriority(Priority.MEDIUM)
@@ -242,7 +242,7 @@ public class CambiarContra extends AppCompatActivity {
                                 }
                                 else if (response.getString("code").equals("200")){
                                     Toast.makeText(CambiarContra.this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(CambiarContra.this, UserArea.class));
+                                    startActivity(new Intent(CambiarContra.this, EditUserActivity.class));
 
                                 }
                             } catch (JSONException e) {
