@@ -79,9 +79,10 @@ public class UserArea extends AppCompatActivity {
     TextView textodispoconectado , tiposensor, colorestimacionaire;
 
     public String valorbeacon = null;
+    public String valorbeaconDoubleMotrar = null;
 
 
-    public int valorbeaconint;
+    public double valorbeacondouble;
 
 
     private EditText valormedicion;
@@ -137,10 +138,16 @@ public class UserArea extends AppCompatActivity {
 
         TramaIBeacon tib = new TramaIBeacon(bytes);
 
-        valorbeacon= String.valueOf(Utilidades.bytesToInt(tib.getMajor()));
-        tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeacon);
+        valorbeacon= String.valueOf(Utilidades.bytesToInt(tib.getMinor()));
 
-        valorbeaconint = Integer.parseInt(valorbeacon);
+
+        valorbeacondouble = Integer.parseInt(valorbeacon);
+
+        valorbeaconDoubleMotrar= String.valueOf(valorbeacondouble/1000);
+
+
+        tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeaconDoubleMotrar);
+
 
         Logica logica = new Logica();
         //logica.enviardatosreal(valorbeaconint);
