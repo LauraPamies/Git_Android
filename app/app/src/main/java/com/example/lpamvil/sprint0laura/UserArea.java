@@ -88,7 +88,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "172.20.10.2";
+    String ip = "192.168.100.119";
 
 
     SharedPreferences preferencias;
@@ -484,46 +484,48 @@ public class UserArea extends AppCompatActivity {
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
-                .getAsString(new StringRequestListener() {
-                    @Override
-                    public void onResponse(String response) {
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    public void onResponse(JSONObject response) {
                         // do anything with response
                         Log.d("RESPUESTA AVERAGE", "va AVERAGE MEDICIONES");
-                        Log.d("RESPUESTA AVERAGE", response);
+                        Log.d("RESPUESTA AVERAGE", response.toString());
                         float f_response = 0;
+                        float valoralto = 0;
                         DecimalFormat formato1 = new DecimalFormat("#.00");
-                        if (!response.equals("null"))
-                        {
-                            f_response = Float.parseFloat(response);
+                            try {
+                                f_response = Float.parseFloat(response.getString("media"));
+                                valoralto = Float.parseFloat(response.getString("valoralto"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-                        }
                         String fecha = preferencias.getString("DateAnterior","");
 
                         //HAY QUE PONER IFs PARA ASIGNAR TEXTOS DEPENDE DE LOS UMBRALES
                         if (0<f_response && f_response<=40)
                         {
 
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es buena: " + formato1.format(f_response));
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es buena: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#65DF48"));
 
                         }else  if (f_response > 40 && f_response <= 120)
                         {
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es normal: " + formato1.format(f_response));
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es regular: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
-                            colorestimacionaire.setBackgroundColor(Color.parseColor("#EFEA56"));
+                            colorestimacionaire.setBackgroundColor(Color.parseColor("#EFA356"));
 
 
                         }else if (f_response >120 && f_response <= 180){
 
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es mala: " + formato1.format(f_response));
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es mala: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#ED8128"));
 
 
                         }else if (f_response > 180)
                         {
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es muy mala: " + formato1.format(f_response));
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es muy mala: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
 
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#E21212"));
@@ -539,6 +541,7 @@ public class UserArea extends AppCompatActivity {
 
 
                     }
+
 
 
 

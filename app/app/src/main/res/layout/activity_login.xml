@@ -9,8 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="319dp"
-        android:layout_height="424dp"
+        android:layout_width="316dp"
+        android:layout_height="445dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,27 +26,27 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/quicksandmedium"
             android:text="Entrar"
             android:textColor="@color/black"
             android:textSize="34sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/edittextuser"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
         <EditText
             android:id="@+id/edittextuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:ems="10"
             android:fontFamily="@font/quicksandmedium"
             android:hint="Usuario"
             android:inputType="textPersonName"
             android:textColor="#6E6E6E"
-            app:layout_constraintBottom_toTopOf="@+id/edittextpass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -55,13 +55,13 @@
             android:id="@+id/edittextpass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:drawableLeft="@drawable/ic_baseline_lock_24"
             android:ems="10"
             android:fontFamily="@font/quicksandmedium"
             android:hint="Contraseña"
             android:inputType="textPassword"
             android:textColor="#6E6E6E"
-            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittextuser" />
@@ -70,36 +70,36 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/boton_redondo"
             android:fontFamily="@font/quicksandmedium"
             android:onClick="botonentrar"
             android:text="Entrar"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/recordarsesioncheck"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittextpass" />
-
-        <CheckBox
-            android:id="@+id/recordarsesioncheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksandmedium"
-            android:text="Recuerdame"
-            app:layout_constraintBottom_toTopOf="@+id/btn_link"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/btn_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="He olvidado mi contraseña"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/recordarsesioncheck"
-            app:layout_constraintStart_toStartOf="@+id/recordarsesioncheck" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recordarsesioncheck" />
+
+        <CheckBox
+            android:id="@+id/recordarsesioncheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/quicksandmedium"
+            android:text="Recuerdame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
