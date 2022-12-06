@@ -32,14 +32,14 @@ public class LoginActivity extends AppCompatActivity {
     EditText user, pass;
     CheckBox recordarsesion;
 
-    String ip = "192.168.100.119";
+    String ip = "192.168.1.133";
 
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
 
 
     private TextView _btn_link; //link
-    String _url = "http://172.20.10.2:4000/#/recover_pass";//link
+    String _url = "http://192.168.1.133:4000/#/recover_pass";//link
 
 
     @Override

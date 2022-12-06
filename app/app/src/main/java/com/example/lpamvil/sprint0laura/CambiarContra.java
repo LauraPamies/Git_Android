@@ -31,7 +31,7 @@ import org.json.JSONObject;
 //Esta clase realizará el cambio de contraseña, accediendo a métodos del servidor.
 public class CambiarContra extends AppCompatActivity {
 
-    String ip = "192.168.100.119";
+    String ip = "192.168.1.133";
 
     Button button3;
 

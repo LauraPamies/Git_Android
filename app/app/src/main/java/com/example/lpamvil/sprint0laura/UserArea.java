@@ -88,7 +88,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "192.168.100.119";
+    String ip = "192.168.1.133";
 
 
     SharedPreferences preferencias;
