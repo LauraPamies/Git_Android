@@ -1,6 +1,7 @@
 package com.example.lpamvil.sprint0laura;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 //Esta clase creará las conexiones de métodos de android con el servidor
@@ -21,6 +24,7 @@ public class Logica {
 
     String ip = "192.168.1.133";
     Date fechaactual = new Date();
+    LocalDateTime date = null;//                                                     laura fecha
 
     static JSONObject jobject = new JSONObject();
 
@@ -42,8 +46,12 @@ public class Logica {
 
         //Se crea un objeto Json para meter los valores de la medida y posteriormente enviarlos en el post
         JSONObject jsonObject = new JSONObject();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            date = LocalDateTime.now();//                                                     laura fecha
+        }
+
         //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
-        Medida medida = new Medida(valorbeacon,1,fechaactual.toString(),38.99694087643454,-0.1650828343732021);
+        Medida medida = new Medida(valorbeacon,1,date.toString(),38.99694087643454,-0.1650828343732021);
 
 
 

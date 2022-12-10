@@ -459,7 +459,7 @@ public class UserArea extends AppCompatActivity {
 
         //
         // crea la fecha actual y la fecha de ayer
-        LocalDate date = null;
+        LocalDate date = null;//                                                     laura fecha
         LocalDate DateAnterior = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             date = LocalDate.now();//                                                     laura fecha
