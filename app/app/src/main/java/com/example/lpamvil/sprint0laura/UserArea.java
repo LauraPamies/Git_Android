@@ -24,6 +24,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -86,6 +88,14 @@ public class UserArea extends AppCompatActivity {
 //------------------------------------------------------------------------------------------VALOR MEDIDO BEACON
 
 
+//------------------------------------------------------------------------------------------VALOR Location
+
+    private LocationManager locManager;
+    public Location loc;
+
+    double longitud;
+    double latitud;
+//------------------------------------------------------------------------------------------VALOR Location
 
     private EditText valormedicion;
     private EditText valorid;
@@ -152,7 +162,9 @@ public class UserArea extends AppCompatActivity {
 
 
         Logica logica = new Logica();
-        logica.enviardatosreal(valorbeacondoubleAux);
+        obtenerCoordenadas();
+
+        logica.enviardatosreal(valorbeacondoubleAux, latitud, longitud);
 
         Log.d(ETIQUETA_LOG, "          VALOR BEACON ENVIADO = " + String.valueOf(valorbeacondoubleAux));
 
@@ -646,6 +658,42 @@ public class UserArea extends AppCompatActivity {
             return "Media distancia";
         } else{
             return "Lejos";
+        }
+    }
+
+
+    /*
+     * Método para obtener la latitud y la longitud
+     *
+     * @param No le pasamos nada
+     *
+     * @return No devuelve nada
+     */
+    // --------------------------------------------------------------
+    public void obtenerCoordenadas() {
+
+        locManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (loc==null){
+                //Location wasnt gathered
+            }else{
+                latitud = loc.getLatitude();
+                //txtLatitud.setText(String.valueOf(latitud));
+                // txtLongitud.setText(String.valueOf(longitud));
+                longitud = loc.getLongitude();
+            }
         }
     }
 

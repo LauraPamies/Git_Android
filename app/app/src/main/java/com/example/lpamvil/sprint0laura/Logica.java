@@ -40,7 +40,7 @@ public class Logica {
      *
      * @param valorbeacon valor del beacon que será enviado al servidor
      */
-    public void enviardatosreal(double valorbeacon)
+    public void enviardatosreal(double valorbeacon,double latitud,double longitud)
     {
         Log.d("RESPUESTAEnviarrrrrr1", "va enviarr ");
 
@@ -51,7 +51,7 @@ public class Logica {
         }
 
         //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
-        Medida medida = new Medida(valorbeacon,1,date.toString(),38.99694087643454,-0.1650828343732021);
+        Medida medida = new Medida(valorbeacon,1,date.toString(),latitud,longitud);
 
 
 
