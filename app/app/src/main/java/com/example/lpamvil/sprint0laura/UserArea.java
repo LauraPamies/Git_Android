@@ -78,11 +78,13 @@ public class UserArea extends AppCompatActivity {
     TextView iddispositivouser, textocalidadaire;
     TextView textodispoconectado , tiposensor, colorestimacionaire;
 
+//------------------------------------------------------------------------------------------VALOR MEDIDO BEACON
     public String valorbeacon = null;
     public String valorbeaconDoubleMotrar = null;
-
-
     public double valorbeacondouble;
+    public double valorbeacondoubleAux;
+//------------------------------------------------------------------------------------------VALOR MEDIDO BEACON
+
 
 
     private EditText valormedicion;
@@ -116,7 +118,7 @@ public class UserArea extends AppCompatActivity {
     // --------------------------------------------------------------
     // --------------------------------------------------------------
     @SuppressLint("MissingPermission")
-    private void mostrarInformacionDispositivoBTLE(ScanResult resultado ) {
+    private void mostrarInformacionDispositivoBTLE(ScanResult resultado ){
 
 
         BluetoothDevice bluetoothDevice = resultado.getDevice();
@@ -142,15 +144,17 @@ public class UserArea extends AppCompatActivity {
 
 
         valorbeacondouble = Integer.parseInt(valorbeacon);
-
-        valorbeaconDoubleMotrar= String.valueOf(valorbeacondouble/1000);
+        valorbeacondoubleAux = valorbeacondouble/1000;
+        valorbeaconDoubleMotrar = String.valueOf(valorbeacondoubleAux);
 
 
         tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeaconDoubleMotrar);
 
 
         Logica logica = new Logica();
-        //logica.enviardatosreal(valorbeaconint);
+        logica.enviardatosreal(valorbeacondoubleAux);
+
+        Log.d(ETIQUETA_LOG, "          VALOR BEACON ENVIADO = " + String.valueOf(valorbeacondoubleAux));
 
         Log.d(ETIQUETA_LOG, " ----------------------------------------------------");
         Log.d(ETIQUETA_LOG, " prefijo  = " + Utilidades.bytesToHexString(tib.getPrefijo()));
@@ -453,11 +457,12 @@ public class UserArea extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
 
-        //Se crea la fecha actual y la fecha de ayer
+        //
+        // crea la fecha actual y la fecha de ayer
         LocalDate date = null;
         LocalDate DateAnterior = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            date = LocalDate.now();
+            date = LocalDate.now();//                                                     laura fecha
             DateAnterior = date.plusDays(-1);
             editorpreferencias.putString("DateAnterior",DateAnterior.toString());
             editorpreferencias.apply();
@@ -493,8 +498,11 @@ public class UserArea extends AppCompatActivity {
                         float valoralto = 0;
                         DecimalFormat formato1 = new DecimalFormat("#.00");
                             try {
-                                f_response = Float.parseFloat(response.getString("media"));
-                                valoralto = Float.parseFloat(response.getString("valoralto"));
+                                if(!response.getString("media").equals("null")){
+                                    f_response = Float.parseFloat(response.getString("media"));
+                                    valoralto = Float.parseFloat(response.getString("valoralto"));
+                                }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

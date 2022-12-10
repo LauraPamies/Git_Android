@@ -36,51 +36,58 @@ public class Logica {
      *
      * @param valorbeacon valor del beacon que será enviado al servidor
      */
-    public void enviardatosreal(int valorbeacon)
+    public void enviardatosreal(double valorbeacon)
     {
-
-
-        //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
-        Medida medida = new Medida(valorbeacon,fechaactual.toString(),38.99694087643454,-0.1650828343732021);
-       
-
+        Log.d("RESPUESTAEnviarrrrrr1", "va enviarr ");
 
         //Se crea un objeto Json para meter los valores de la medida y posteriormente enviarlos en el post
         JSONObject jsonObject = new JSONObject();
+        //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
+        Medida medida = new Medida(valorbeacon,1,fechaactual.toString(),38.99694087643454,-0.1650828343732021);
+
+
+
         try {
-            jsonObject.put("id", null); //se envia id null ya que en la base de datos la id es autoincrementable
+            Log.d("RESPUESTAEnviarrrrrr2", "va enviarr ");
+
+            jsonObject.put("idsensor", medida.getIdsensor()); //   idSensor
             jsonObject.put("valor", medida.getValor());
             jsonObject.put("fecha", medida.getFecha());
             jsonObject.put("latitud", medida.getLatitud());
             jsonObject.put("longitud", medida.getLongitud());
 
+
         } catch (JSONException e) {
             e.printStackTrace();
+
         }
 
 
         //El método de la api para hacer el post
-        AndroidNetworking.post("http://192.168.0.14:8080/altaMedicion")
+        AndroidNetworking.post("http://" + ip + ":3000/insert_measure1")
                 .addJSONObjectBody(jsonObject) // posting json
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
+
                     @Override
                     public void onResponse(JSONArray response) {
                         // do anything with response
+                        Log.d("RESPUESTAEnviarrrrrr3", "va enviarr ");
+
                     }
                     @Override
                     public void onError(ANError error) {
                         // handle error
+                        Log.d("RESPUESTAEnviarrrrrr4", "no va enviarr ");
+
 
 
                     }
                 });
 
     }
-
-
 
 
     /*
