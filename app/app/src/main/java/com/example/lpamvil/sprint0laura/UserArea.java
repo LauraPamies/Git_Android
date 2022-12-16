@@ -100,7 +100,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "192.168.1.133";
+    String ip = "172.20.10.2";
 
 
     SharedPreferences preferencias;
@@ -239,7 +239,7 @@ public class UserArea extends AppCompatActivity {
                         notificacion_unica = true;
                     }
                     detectado = false;
-
+                    contador = 0;
                 }
 
             }

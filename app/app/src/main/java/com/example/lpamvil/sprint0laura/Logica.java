@@ -22,7 +22,7 @@ import java.util.Date;
 //Esta clase creará las conexiones de métodos de android con el servidor
 public class Logica {
 
-    String ip = "192.168.1.133";
+    String ip = "172.20.10.2";
     Date fechaactual = new Date();
     LocalDateTime date = null;//                                                     laura fecha
 
@@ -51,7 +51,7 @@ public class Logica {
         }
 
         //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
-        Medida medida = new Medida(valorbeacon,1,date.toString(),latitud,longitud);
+        Medida medida = new Medida(valorbeacon,10,date.toString(),latitud,longitud);
 
 
 
