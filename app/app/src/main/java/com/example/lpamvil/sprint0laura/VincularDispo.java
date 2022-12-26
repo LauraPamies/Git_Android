@@ -252,7 +252,6 @@ public class VincularDispo extends AppCompatActivity {
         if(!preferencias.getString("dispositivovinculado", "nohay").equals("nohay")) //si ha encontrado algún dispositivo
         {
             Toast.makeText(this, "Dispositivo vinculado correctamente", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, UserArea.class));
 
         }else {
             Toast.makeText(this, "No se ha podido vincular el dispositivo", Toast.LENGTH_SHORT).show();

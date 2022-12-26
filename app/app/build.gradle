@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
     implementation 'com.amitshekhar.android:jackson-android-networking:1.0.2'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 }

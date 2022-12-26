@@ -493,8 +493,12 @@ public class UserArea extends AppCompatActivity {
                         float valoralto = 0;
                         DecimalFormat formato1 = new DecimalFormat("#.00");
                             try {
-                                f_response = Float.parseFloat(response.getString("media"));
-                                valoralto = Float.parseFloat(response.getString("valoralto"));
+                                if (!response.getString("media").equals("null"))
+                                {
+                                    f_response = Float.parseFloat(response.getString("media"));
+                                    valoralto = Float.parseFloat(response.getString("valoralto"));
+                                }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -502,30 +506,30 @@ public class UserArea extends AppCompatActivity {
                         String fecha = preferencias.getString("DateAnterior","");
 
                         //HAY QUE PONER IFs PARA ASIGNAR TEXTOS DEPENDE DE LOS UMBRALES
-                        if (0<f_response && f_response<=40)
+                        if (0<f_response && f_response<=0.2)
                         {
 
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es buena: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es buena: 0" +formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#65DF48"));
 
-                        }else  if (f_response > 40 && f_response <= 120)
+                        }else  if (f_response > 0.2 && f_response <= 0.3)
                         {
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es regular: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es regular: 0" +formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#EFA356"));
 
 
-                        }else if (f_response >120 && f_response <= 180){
+                        }else if (f_response >0.3 && f_response <= 0.4){
 
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es mala: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es mala: 0" +formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#ED8128"));
 
 
-                        }else if (f_response > 180)
+                        }else if (f_response > 0.4)
                         {
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es muy mala: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es muy mala: 0" +formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
 
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#E21212"));

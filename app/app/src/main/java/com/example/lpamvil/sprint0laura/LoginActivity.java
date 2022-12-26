@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private TextView _btn_link; //link
-    String _url = "http://172.20.10.2:4000/#/recover_pass";//link
+    String _url = "http://192.168.100.119:4000/#/recover_pass";//link
 
 
     @Override
@@ -125,17 +125,17 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject respuesta = response.getJSONObject(0);
                             Log.d("VALOR DE OBJECT", respuesta.toString());
+                            Log.d("VALOR DE OBJECT total", response.toString());
 
-                            editorpreferencias.putString("tiposensor", respuesta.getString("Tipo"));
-                            editorpreferencias.putString("idSensor", respuesta.getString("idSensor"));
-                            editorpreferencias.putString("dispositivovinculado", respuesta.getString("Nombre"));
+
                             editorpreferencias.putString("idUsuario", respuesta.getString("idUsuario"));
 
                             editorpreferencias.apply();
 
                             Log.d("APLICA LAS PREFERENCIAS", "APLICA LAS PREFERENCIAS DEL SENSOR");
 
-                            startActivity(new Intent(LoginActivity.this, UserArea.class));
+                            //SI TIENE SENSORES VA AL SELECTOR DE SENSORES
+                            startActivity(new Intent(LoginActivity.this, SelectSensor.class));
 
 
                         } catch (JSONException e) {
@@ -153,7 +153,6 @@ public class LoginActivity extends AppCompatActivity {
                         editorpreferencias.putString("tiposensor", "");
                         editorpreferencias.putString("idSensor", "");
                         editorpreferencias.putString("dispositivovinculado", "nohay");
-                        editorpreferencias.putString("idUsuario", "");
 
                         editorpreferencias.apply();
                         startActivity(new Intent(LoginActivity.this, AnyadirDispositivo.class));
