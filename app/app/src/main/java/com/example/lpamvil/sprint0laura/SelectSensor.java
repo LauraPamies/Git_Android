@@ -218,16 +218,15 @@ public class SelectSensor extends AppCompatActivity {
         layoutanimado.startAnimation(animation);
     }
 
-    public void logoutbutton(View view)
-    {
+    public void logoutbutton(View view) {
 
-        editorpreferencias.putBoolean("sesionrecordada",false);
-        editorpreferencias.putString("dispositivovinculado","nohay");
+        editorpreferencias.putBoolean("sesionrecordada", false);
+        editorpreferencias.putString("dispositivovinculado", "nohay");
+        editorpreferencias.putString("idSensor", "");
         editorpreferencias.apply();
         Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+
         startActivity(new Intent(this, LoginActivity.class));
-
-
     }
 
 

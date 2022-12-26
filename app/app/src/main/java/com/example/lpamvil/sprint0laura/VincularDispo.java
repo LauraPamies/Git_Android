@@ -18,6 +18,7 @@ import android.view.animation.LayoutAnimationController;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class VincularDispo extends AppCompatActivity {
     private ConstraintLayout layoutanimado;
 
 
-
+    ImageView imageView7;
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
     TextView iddispositivo;
@@ -57,7 +58,7 @@ public class VincularDispo extends AppCompatActivity {
 
         botonmenu_userarea = findViewById(R.id.botonmenu_userarea);
         layoutanimado = (ConstraintLayout) findViewById(R.id.layoutanimado);
-
+        imageView7 = findViewById(R.id.imageView7);
         botonguardardispo = findViewById(R.id.botonguardardispo);
 
     }
@@ -70,6 +71,7 @@ public class VincularDispo extends AppCompatActivity {
             animar("aparecer");
             layoutanimado.setVisibility(View.VISIBLE);
             botonmenu_userarea.setImageResource(R.drawable.ic_baseline_close_40);
+            imageView7.setVisibility(View.GONE);
             botonguardardispo.setVisibility(View.GONE);
 
             menudesplegado = true;
@@ -78,6 +80,8 @@ public class VincularDispo extends AppCompatActivity {
             layoutanimado.setVisibility(View.GONE);
             botonmenu_userarea.setImageResource(R.drawable.menu);
             botonguardardispo.setVisibility(View.VISIBLE);
+            imageView7.setVisibility(View.VISIBLE);
+
 
             menudesplegado = false;
         }
@@ -131,9 +135,9 @@ public class VincularDispo extends AppCompatActivity {
 
     }
 
-    public void vinculardispo(View view)
+    public void mis_sensores(View view)
     {
-        startActivity(new Intent(this, VincularDispo.class));
+        startActivity(new Intent(this, SelectSensor.class));
 
     }
 
@@ -252,6 +256,8 @@ public class VincularDispo extends AppCompatActivity {
         if(!preferencias.getString("dispositivovinculado", "nohay").equals("nohay")) //si ha encontrado algún dispositivo
         {
             Toast.makeText(this, "Dispositivo vinculado correctamente", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, SelectSensor.class));
+
 
         }else {
             Toast.makeText(this, "No se ha podido vincular el dispositivo", Toast.LENGTH_SHORT).show();
@@ -268,15 +274,14 @@ public class VincularDispo extends AppCompatActivity {
      *
      */
 
-    public void logoutbutton(View view)
-    {
+    public void logoutbutton(View view) {
 
-        editorpreferencias.putBoolean("sesionrecordada",false);
-        editorpreferencias.putString("dispositivovinculado","nohay");
+        editorpreferencias.putBoolean("sesionrecordada", false);
+        editorpreferencias.putString("dispositivovinculado", "nohay");
+        editorpreferencias.putString("idSensor", "");
         editorpreferencias.apply();
         Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+
         startActivity(new Intent(this, LoginActivity.class));
-
-
     }
 }

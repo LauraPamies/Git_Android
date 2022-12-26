@@ -397,9 +397,9 @@ public class UserArea extends AppCompatActivity {
 
     }
 
-    public void vinculardispo(View view)
+    public void mis_sensores(View view)
     {
-        startActivity(new Intent(this, VincularDispo.class));
+        startActivity(new Intent(this, SelectSensor.class));
 
     }
 
@@ -576,6 +576,7 @@ public class UserArea extends AppCompatActivity {
 
         editorpreferencias.putBoolean("sesionrecordada",false);
         editorpreferencias.putString("dispositivovinculado","nohay");
+        editorpreferencias.putString("idSensor", "");
         editorpreferencias.apply();
         Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
         this.detenerBusquedaDispositivosBTLE();
