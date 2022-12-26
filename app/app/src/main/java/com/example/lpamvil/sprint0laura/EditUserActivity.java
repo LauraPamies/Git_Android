@@ -144,9 +144,9 @@ public class EditUserActivity extends AppCompatActivity {
 
     }
 
-    public void vinculardispo(View view)
+    public void mis_sensores(View view)
     {
-        startActivity(new Intent(this, VincularDispo.class));
+        startActivity(new Intent(this, SelectSensor.class));
 
     }
 
@@ -203,18 +203,15 @@ public class EditUserActivity extends AppCompatActivity {
      * View-> logoutbutton()
      *
      */
-    public void logoutbutton(View view)
-    {
+    public void logoutbutton(View view) {
 
-        editorpreferencias.putBoolean("sesionrecordada",false);
-        editorpreferencias.putString("dispositivovinculado","nohay");
+        editorpreferencias.putBoolean("sesionrecordada", false);
+        editorpreferencias.putString("dispositivovinculado", "nohay");
+        editorpreferencias.putString("idSensor", "");
         editorpreferencias.apply();
         Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
 
-
         startActivity(new Intent(this, LoginActivity.class));
-
-
     }
 
 

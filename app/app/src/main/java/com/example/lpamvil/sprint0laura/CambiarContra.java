@@ -150,9 +150,9 @@ public class CambiarContra extends AppCompatActivity {
 
     }
 
-    public void vinculardispo(View view)
+    public void mis_sensores(View view)
     {
-        startActivity(new Intent(this, VincularDispo.class));
+        startActivity(new Intent(this, SelectSensor.class));
 
     }
 
@@ -170,17 +170,16 @@ public class CambiarContra extends AppCompatActivity {
      * View-> logoutbutton()
      *
      */
-    public void logoutbutton(View view)
-    {
-        editorpreferencias.putBoolean("sesionrecordada",false);
-        editorpreferencias.putString("dispositivovinculado","nohay");
+
+    public void logoutbutton(View view) {
+
+        editorpreferencias.putBoolean("sesionrecordada", false);
+        editorpreferencias.putString("dispositivovinculado", "nohay");
+        editorpreferencias.putString("idSensor", "");
         editorpreferencias.apply();
         Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
 
-
         startActivity(new Intent(this, LoginActivity.class));
-
-
     }
 
 

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -45,6 +47,9 @@ public class Contactar extends AppCompatActivity{
 
     Button button_send_email;
     private ConstraintLayout layoutanimado;
+    SharedPreferences preferencias;
+    SharedPreferences.Editor editorpreferencias;
+
 
 
     @Override
@@ -62,6 +67,10 @@ public class Contactar extends AppCompatActivity{
 
         botonmenu_userarea = findViewById(R.id.botonmenu_userarea);
         layoutanimado = (ConstraintLayout) findViewById(R.id.layoutanimado);
+
+        //Creación de preferencias
+        preferencias = this.getSharedPreferences("sesiones", Context.MODE_PRIVATE);
+        editorpreferencias = preferencias.edit();
 
         button_send_email = findViewById(R.id.button_send_email);
 
@@ -139,9 +148,9 @@ public class Contactar extends AppCompatActivity{
 
     }
 
-    public void vinculardispo(View view)
+    public void mis_sensores(View view)
     {
-        startActivity(new Intent(this, VincularDispo.class));
+        startActivity(new Intent(this, SelectSensor.class));
 
     }
 
@@ -151,6 +160,17 @@ public class Contactar extends AppCompatActivity{
 
     }
 
+
+    public void logoutbutton(View view) {
+
+        editorpreferencias.putBoolean("sesionrecordada", false);
+        editorpreferencias.putString("dispositivovinculado", "nohay");
+        editorpreferencias.putString("idSensor", "");
+        editorpreferencias.apply();
+        Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(this, LoginActivity.class));
+    }
     /*
      * Recoge los datos introducidos por el usuario y los manda por correo desde un hilo en segundo plano
      */

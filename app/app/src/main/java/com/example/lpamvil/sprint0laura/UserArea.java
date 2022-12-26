@@ -100,7 +100,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "172.20.10.2";
+    String ip = "192.168.100.119";
 
 
     SharedPreferences preferencias;
@@ -413,9 +413,9 @@ public class UserArea extends AppCompatActivity {
 
     }
 
-    public void vinculardispo(View view)
+    public void mis_sensores(View view)
     {
-        startActivity(new Intent(this, VincularDispo.class));
+        startActivity(new Intent(this, SelectSensor.class));
 
     }
 
@@ -437,7 +437,7 @@ public class UserArea extends AppCompatActivity {
         editorpreferencias = preferencias.edit();
 
 
-        Log.d("userarea","entra en la sesion activa");
+        Log.d("userarea", "entra en la sesion activa");
 
         textodispoconectado = findViewById(R.id.textodispoconectado);
         tiposensor = findViewById(R.id.tiposensor);
@@ -447,15 +447,14 @@ public class UserArea extends AppCompatActivity {
 
         iddispositivouser = findViewById(R.id.iddispositivouser);
         textocalidadaire = findViewById(R.id.textocalidadaire);
-        nombredispo = preferencias.getString("dispositivovinculado","nohay");
+        nombredispo = preferencias.getString("dispositivovinculado", "nohay");
         iddispositivouser.setText("Id del dispositivo: " + nombredispo);
 
         colorestimacionaire = findViewById(R.id.colorestimacionaire);
 
 
-        if (!nombredispo.equals("nohay"))
-        {
-            Log.d("NOMBRE DISPOSITIVO",nombredispo);
+        if (!nombredispo.equals("nohay")) {
+            Log.d("NOMBRE DISPOSITIVO", nombredispo);
             inicializarBlueTooth();
             this.buscarEsteDispositivoBTLE(nombredispo);
 
@@ -464,7 +463,7 @@ public class UserArea extends AppCompatActivity {
         Log.d("--", " onCreate(): termina ");
 
 
-        String idSensor = preferencias.getString("idSensor","");
+        String idSensor = preferencias.getString("idSensor", "");
 
 
         JSONObject jsonObject = new JSONObject();
@@ -476,20 +475,19 @@ public class UserArea extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             date = LocalDate.now();//                                                     laura fecha
             DateAnterior = date.plusDays(-1);
-            editorpreferencias.putString("DateAnterior",DateAnterior.toString());
+            editorpreferencias.putString("DateAnterior", DateAnterior.toString());
             editorpreferencias.apply();
 
         }
 
 
-        Log.d("FECHA ACTUAL",date.toString());
-        Log.d("FECHA DE AYER",DateAnterior.toString());
+        Log.d("FECHA ACTUAL", date.toString());
+        Log.d("FECHA DE AYER", DateAnterior.toString());
 
 
-
-        try{
-            jsonObject.put("date",DateAnterior);
-            jsonObject.put("id_sensor",idSensor);
+        try {
+            jsonObject.put("date", DateAnterior);
+            jsonObject.put("id_sensor", idSensor);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -509,49 +507,47 @@ public class UserArea extends AppCompatActivity {
                         float f_response = 0;
                         float valoralto = 0;
                         DecimalFormat formato1 = new DecimalFormat("#.00");
-                            try {
-                                if(!response.getString("media").equals("null")){
-                                    f_response = Float.parseFloat(response.getString("media"));
-                                    valoralto = Float.parseFloat(response.getString("valoralto"));
-                                }
+                        try {
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                            if (!response.getString("media").equals("null")) {
+
+                                f_response = Float.parseFloat(response.getString("media"));
+                                valoralto = Float.parseFloat(response.getString("valoralto"));
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                        String fecha = preferencias.getString("DateAnterior","");
+                        String fecha = preferencias.getString("DateAnterior", "");
 
                         //HAY QUE PONER IFs PARA ASIGNAR TEXTOS DEPENDE DE LOS UMBRALES
-                        if (0<f_response && f_response<=40)
-                        {
+                        if (0 < f_response && f_response <= 0.2) {
 
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es buena: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es buena: 0" + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#65DF48"));
 
-                        }else  if (f_response > 40 && f_response <= 120)
-                        {
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es regular: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                        } else if (f_response > 0.2 && f_response <= 0.3) {
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es regular: 0" + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#EFA356"));
 
 
-                        }else if (f_response >120 && f_response <= 180){
+                        } else if (f_response > 0.3 && f_response <= 0.4) {
 
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es mala: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es mala: 0" + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#ED8128"));
 
 
-                        }else if (f_response > 180)
-                        {
-                            textocalidadaire.setText("La media de calidad del aire\nde ayer es muy mala: " + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
+                        } else if (f_response > 0.4) {
+                            textocalidadaire.setText("La media de calidad del aire\nde ayer es muy mala: 0" + formato1.format(f_response) + "\nCon zonas de máxima de " + valoralto);
                             colorestimacionaire.setVisibility(View.VISIBLE);
 
                             colorestimacionaire.setBackgroundColor(Color.parseColor("#E21212"));
 
 
-                        }else {
+                        } else {
 
                             textocalidadaire.setText("No hay medidas registradas de ayer.\n Fecha: " + fecha);
                             colorestimacionaire.setVisibility(View.INVISIBLE);
@@ -559,26 +555,17 @@ public class UserArea extends AppCompatActivity {
                         }
 
 
-
                     }
 
-
-
-
                     @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Log.d("RESPUESTA AVERAGE ERROR", error.toString());
+                    public void onError(ANError anError) {
 
                     }
 
                 });
 
 
-
     }
-    
-         
 
 
     /*
@@ -592,6 +579,7 @@ public class UserArea extends AppCompatActivity {
 
         editorpreferencias.putBoolean("sesionrecordada",false);
         editorpreferencias.putString("dispositivovinculado","nohay");
+        editorpreferencias.putString("idSensor", "");
         editorpreferencias.apply();
         Toast.makeText(this, "Sesion cerrada", Toast.LENGTH_SHORT).show();
         this.detenerBusquedaDispositivosBTLE();

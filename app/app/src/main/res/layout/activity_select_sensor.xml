@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserArea">
+    tools:context=".SelectSensor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -51,74 +51,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <TextView
-        android:id="@+id/iddispositivouser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="Id del dispositivo:"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-    <TextView
-        android:id="@+id/textodispoconectado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="Conectando..."
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iddispositivouser" />
-
-    <TextView
-        android:id="@+id/tiposensor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="tipo"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textodispoconectado" />
-
-    <TextView
-        android:id="@+id/distancia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Distancia del nodo: "
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textocalidadaire"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tiposensor" />
-
-    <TextView
-        android:id="@+id/textocalidadaire"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="No hay mediciones con este sensor"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/colorestimacionaire"
-        android:layout_width="50px"
-        android:layout_height="50px"
-        android:layout_marginEnd="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textocalidadaire"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textocalidadaire" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutanimado"
@@ -134,14 +66,14 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/quicksandmedium"
             android:onClick="botoncontactanos"
             android:text="CONTACTANOS"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView15"
@@ -163,8 +95,8 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/quicksandmedium"
-            android:onClick="mis_sensores"
-            android:text="MIS SENSORES"
+            android:onClick="vinculardispo"
+            android:text="VINCULAR\n TRACKER"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -192,19 +124,6 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:fontFamily="@font/quicksandmedium"
-            android:onClick="botonuserarea"
-            android:text="AREA USUARIO"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -244,24 +163,19 @@
             android:layout_width="36dp"
             android:layout_height="33dp"
             android:layout_marginStart="16dp"
-            android:onClick="mis_sensores"
+            android:onClick="vinculardispo"
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView16"
             app:srcCompat="@drawable/ic_baseline_battery_0_bar_24" />
 
-        <ImageView
-            android:id="@+id/imageView16"
-            android:layout_width="36dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="16dp"
-            android:onClick="botonuserarea"
-            app:layout_constraintBottom_toBottomOf="@+id/textView12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView12"
-            app:srcCompat="@drawable/ic_baseline_account_circle_24" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclersensores"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
