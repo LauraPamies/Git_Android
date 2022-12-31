@@ -45,7 +45,7 @@ public class SelectSensor extends AppCompatActivity {
 
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
-    String ip = "192.168.100.119";
+    String ip = "192.168.1.65";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

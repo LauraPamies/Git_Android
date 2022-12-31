@@ -67,8 +67,9 @@ public class UserArea extends AppCompatActivity {
     // It allows to prevent the notification from being created more than once when it's already created
     boolean notificacion_unica = false;
     boolean detectado = false;
-    int contador = 0;
-
+    //int contador = 0;
+    long tiempo_inicial = 0;
+    long tiempo_final = 0;
     ImageButton botonmenu_userarea;
 
     boolean menudesplegado=false;
@@ -100,7 +101,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "192.168.100.119";
+    String ip = "192.168.1.65";
 
 
     SharedPreferences preferencias;
@@ -217,9 +218,9 @@ public class UserArea extends AppCompatActivity {
                 Log.d(ETIQUETA_LOG, "  buscarEsteDispositivoBTLE(): onScanResult() ");
                 //Log.d(ETIQUETA_LOG, " dispositivo detectado = " + bluetoothDevice2.getName());
                 Log.d("DISPOSITIVO BUSCADO",dispositivoBuscado);
-                contador++;
+                //contador++;
 
-                if(contador < 500){
+                if(System.currentTimeMillis()/1000 - tiempo_inicial < 30){
                     if(resultado.getDevice().getName() != null && resultado.getDevice().getName().equals(dispositivoBuscado)){
                         mostrarInformacionDispositivoBTLE( resultado );
                         notificacion_unica = false;
@@ -230,16 +231,15 @@ public class UserArea extends AppCompatActivity {
                         dist.setText("Distancia al sensor: " + distancia);
                     }
                 } else{
-                    if(detectado == false){
-
+                    if(!detectado && !notificacion_unica){
                         textodispoconectado.setText("Dispositivo no conectado");
                         Log.d(ETIQUETA_LOG, "No se ha encontrado el dispositivo");
-                        //createNotificationChannel();
-                        //createNotification();
+                        createNotificationChannel();
+                        createNotification();
                         notificacion_unica = true;
                     }
                     detectado = false;
-                    contador = 0;
+                    tiempo_inicial = System.currentTimeMillis()/1000;
                 }
 
             }
@@ -455,6 +455,7 @@ public class UserArea extends AppCompatActivity {
 
         if (!nombredispo.equals("nohay")) {
             Log.d("NOMBRE DISPOSITIVO", nombredispo);
+            tiempo_inicial = System.currentTimeMillis()/1000;
             inicializarBlueTooth();
             this.buscarEsteDispositivoBTLE(nombredispo);
 
