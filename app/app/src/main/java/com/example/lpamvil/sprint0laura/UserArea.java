@@ -67,9 +67,7 @@ public class UserArea extends AppCompatActivity {
     // It allows to prevent the notification from being created more than once when it's already created
     boolean notificacion_unica = false;
     boolean detectado = false;
-    //int contador = 0;
     long tiempo_inicial = 0;
-    long tiempo_final = 0;
     ImageButton botonmenu_userarea;
 
     boolean menudesplegado=false;
@@ -101,7 +99,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "192.168.1.65";
+    String ip = Utilidades.ip;
 
 
     SharedPreferences preferencias;
@@ -156,6 +154,12 @@ public class UserArea extends AppCompatActivity {
 
         valorbeacondouble = Integer.parseInt(valorbeacon);
         valorbeacondoubleAux = valorbeacondouble/1000;
+
+        //Si el valor de contaminación recibido supera el umbral, se genera una notificacion
+        if(valorbeacondoubleAux > 0.3){
+            createNotificationChannel();
+            createNotification("Límite de calidad del aire excedido", 1);
+        }
         valorbeaconDoubleMotrar = String.valueOf(valorbeacondoubleAux);
 
 
@@ -235,7 +239,7 @@ public class UserArea extends AppCompatActivity {
                         textodispoconectado.setText("Dispositivo no conectado");
                         Log.d(ETIQUETA_LOG, "No se ha encontrado el dispositivo");
                         createNotificationChannel();
-                        createNotification();
+                        createNotification("Desconexion del nodo", 0);
                         notificacion_unica = true;
                     }
                     detectado = false;
@@ -622,11 +626,11 @@ public class UserArea extends AppCompatActivity {
      *
      *
      */
-    private void createNotification(){
+    private void createNotification(String texto, int notification_id){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
         builder.setSmallIcon(R.drawable.icono1);
         builder.setContentTitle("Pollution Tracker");
-        builder.setContentText("Desconexion del nodo");
+        builder.setContentText(texto);
         builder.setColor(Color.GREEN);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.MAGENTA, 1000, 1000);
@@ -634,7 +638,7 @@ public class UserArea extends AppCompatActivity {
         builder.setDefaults(Notification.DEFAULT_SOUND);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
+        notificationManagerCompat.notify(notification_id, builder.build());
     }
 
     private String estimarDistancia(ScanResult resultado){
