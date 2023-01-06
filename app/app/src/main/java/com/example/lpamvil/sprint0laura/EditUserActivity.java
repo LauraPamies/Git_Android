@@ -23,8 +23,7 @@ import org.json.JSONException;
 //Esta clase realizará el cambio de datos de perfil del usaurio, accediendo a métodos del servidor.
 public class EditUserActivity extends AppCompatActivity {
 
-    EditText editnombre, editmail,edittelefono;
-
+    EditText editnombre, editmail, edittelefono;
     String usuario;
 
     Button button3;

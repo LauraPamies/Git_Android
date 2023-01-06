@@ -1,5 +1,7 @@
 package com.example.lpamvil.sprint0laura;
 
+import static java.lang.Math.abs;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -100,7 +102,7 @@ public class UserArea extends AppCompatActivity {
     private EditText valormedicion;
     private EditText valorid;
 
-    String ip = "172.20.10.2";
+    String ip = "192.168.1.136";
 
 
     SharedPreferences preferencias;
@@ -154,9 +156,8 @@ public class UserArea extends AppCompatActivity {
 
 
         valorbeacondouble = Integer.parseInt(valorbeacon);
-        valorbeacondoubleAux = valorbeacondouble/1000;
+        valorbeacondoubleAux = abs(valorbeacondouble/1000);
         valorbeaconDoubleMotrar = String.valueOf(valorbeacondoubleAux);
-
 
         tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeaconDoubleMotrar);
 

@@ -22,7 +22,7 @@ import java.util.Date;
 //Esta clase creará las conexiones de métodos de android con el servidor
 public class Logica {
 
-    String ip = "172.20.10.2";
+    String ip = "192.168.1.136";
     Date fechaactual = new Date();
     LocalDateTime date = null;//                                                     laura fecha
 
