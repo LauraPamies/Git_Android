@@ -71,6 +71,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/quicksandmedium"
             android:text="Correo"
+            android:inputType="textEmailAddress"
             android:textColor="@color/black" />
 
         <EditText

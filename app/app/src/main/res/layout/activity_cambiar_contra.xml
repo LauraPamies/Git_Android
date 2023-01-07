@@ -80,7 +80,7 @@
             android:layout_marginStart="70dp"
             android:layout_marginBottom="30dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/textnuevacontra"
@@ -98,7 +98,7 @@
             android:layout_marginStart="70dp"
             android:layout_marginBottom="30dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/text"
@@ -116,7 +116,7 @@
             android:layout_marginStart="70dp"
             android:layout_marginBottom="30dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
 
     </LinearLayout>
 

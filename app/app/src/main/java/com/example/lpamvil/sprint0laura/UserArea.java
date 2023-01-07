@@ -1,5 +1,7 @@
 package com.example.lpamvil.sprint0laura;
 
+import static java.lang.Math.abs;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -153,7 +155,7 @@ public class UserArea extends AppCompatActivity {
 
 
         valorbeacondouble = Integer.parseInt(valorbeacon);
-        valorbeacondoubleAux = valorbeacondouble/1000;
+        valorbeacondoubleAux = abs(valorbeacondouble/1000);
 
         //Si el valor de contaminación recibido supera el umbral, se genera una notificacion
         if(valorbeacondoubleAux > 0.3){
@@ -161,8 +163,6 @@ public class UserArea extends AppCompatActivity {
             createNotification("Límite de calidad del aire excedido", 1);
         }
         valorbeaconDoubleMotrar = String.valueOf(valorbeacondoubleAux);
-
-
         tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeaconDoubleMotrar);
 
 
@@ -191,9 +191,6 @@ public class UserArea extends AppCompatActivity {
         Log.d(ETIQUETA_LOG, " ****************************************************");
 
     } // ()
-
-
-
 
     /*
      * @brief Busca un dispositivo BTLE por el nombre que se le pase como parámetro

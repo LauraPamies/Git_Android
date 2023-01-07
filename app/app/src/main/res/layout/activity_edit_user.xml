@@ -99,7 +99,7 @@
             android:layout_marginStart="70dp"
             android:layout_marginBottom="30dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/textView6"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="phone" />
 
     </LinearLayout>
 
