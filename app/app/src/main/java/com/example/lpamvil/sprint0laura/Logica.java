@@ -32,6 +32,7 @@ public class Logica {
     boolean sesionactiva;
     SharedPreferences preferencias;
     SharedPreferences.Editor editorpreferencias;
+    int idUsuario;
 
 
     /*
@@ -49,9 +50,10 @@ public class Logica {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             date = LocalDateTime.now();//                                                     laura fecha
         }
+        idUsuario = Integer.parseInt(preferencias.getString("idUsuario","prueba"));
 
         //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
-        Medida medida = new Medida(valorbeacon,10,date.toString(),latitud,longitud);
+        Medida medida = new Medida(valorbeacon,idUsuario,date.toString(),latitud,longitud);
 
 
 
