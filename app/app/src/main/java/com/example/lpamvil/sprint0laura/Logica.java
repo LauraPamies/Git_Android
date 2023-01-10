@@ -1,7 +1,9 @@
 package com.example.lpamvil.sprint0laura;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,19 +31,18 @@ public class Logica {
     static JSONObject jobject = new JSONObject();
 
 
-    boolean sesionactiva;
-    SharedPreferences preferencias;
-    SharedPreferences.Editor editorpreferencias;
-    int idUsuario;
 
 
-    /*
+
+
+
+        /*
      * @brief Crea la conexión con el método del servidor para insertar datos
      * int:valorbeacon -> enviardatosreal()
      *
      * @param valorbeacon valor del beacon que será enviado al servidor
      */
-    public void enviardatosreal(double valorbeacon,double latitud,double longitud)
+    public void enviardatosreal(int idSensor,double valorbeacon,double latitud,double longitud)
     {
         Log.d("RESPUESTAEnviarrrrrr1", "va enviarr ");
 
@@ -50,10 +51,9 @@ public class Logica {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             date = LocalDateTime.now();//                                                     laura fecha
         }
-        idUsuario = Integer.parseInt(preferencias.getString("idUsuario","prueba"));
 
         //Se crea una clase medida donde se insertan los atributos del valor de beacon, fecha, latitud y longitud
-        Medida medida = new Medida(valorbeacon,idUsuario,date.toString(),latitud,longitud);
+        Medida medida = new Medida(valorbeacon,idSensor,date.toString(),latitud,longitud);
 
 
 

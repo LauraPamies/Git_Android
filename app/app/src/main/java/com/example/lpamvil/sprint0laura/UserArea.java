@@ -164,12 +164,13 @@ public class UserArea extends AppCompatActivity {
         }
         valorbeaconDoubleMotrar = String.valueOf(valorbeacondoubleAux);
         tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeaconDoubleMotrar);
+        int idSensor = Integer.parseInt(preferencias.getString("idSensor","prueba"));
 
 
         Logica logica = new Logica();
         obtenerCoordenadas();
 
-        logica.enviardatosreal(valorbeacondoubleAux, latitud, longitud);
+        logica.enviardatosreal(idSensor,valorbeacondoubleAux, latitud, longitud);
 
         Log.d(ETIQUETA_LOG, "          VALOR BEACON ENVIADO = " + String.valueOf(valorbeacondoubleAux));
 
