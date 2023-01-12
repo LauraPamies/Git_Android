@@ -653,6 +653,8 @@ public class UserArea extends AppCompatActivity {
     }
 
 
+    LocationManager mLocationMaganer;
+
     /*
      * Método para obtener la latitud y la longitud
      *
@@ -662,9 +664,12 @@ public class UserArea extends AppCompatActivity {
      */
     // --------------------------------------------------------------
     public void obtenerCoordenadas() {
-
+        Location myLocation = getLastKnownLocation();
+        Log.d("TAG", "obtenerCoordenadas: " + myLocation);
         locManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
+        latitud = myLocation.getLatitude();
+        longitud = myLocation.getLongitude();
+        /*
         if (locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
@@ -685,9 +690,30 @@ public class UserArea extends AppCompatActivity {
                 // txtLongitud.setText(String.valueOf(longitud));
                 longitud = loc.getLongitude();
             }
+
+
         }
+
+         */
     }
 
+    private Location getLastKnownLocation() {
+        mLocationMaganer = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = mLocationMaganer.getProviders(true);
+        Location bestlocation = null;
+        for(String provider : providers){
+            @SuppressLint("MissingPermission") Location l = mLocationMaganer.getLastKnownLocation(provider);
+            if (l==null)
+            {
+                continue;
+            }
+            if (bestlocation == null || l.getAccuracy() < bestlocation.getAccuracy()){
+                bestlocation = l;
+
+
+            }
+        } return bestlocation;
+    }
 
 
 }
