@@ -160,7 +160,7 @@ public class UserArea extends AppCompatActivity {
         //Si el valor de contaminación recibido supera el umbral, se genera una notificacion
         if(valorbeacondoubleAux > 0.3){
             createNotificationChannel();
-            createNotification("Límite de calidad del aire excedido", 1);
+            createNotification("Límite de calidad del aire excedido en (" + latitud+ ", " + longitud + ")", 1);
         }
         valorbeaconDoubleMotrar = String.valueOf(valorbeacondoubleAux);
         tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeaconDoubleMotrar);
