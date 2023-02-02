@@ -28,6 +28,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -688,6 +689,61 @@ public class UserArea extends AppCompatActivity {
         }
     }
 
+    /*
+     * Recoge los datos introducidos por el usuario y los manda por correo desde un hilo en segundo plano
+     */
+    private class CorreoSegundoPlano extends AsyncTask<String, Float, Integer> {
+
+        @Override
+        protected Integer doInBackground(String... variableNoUsada) {
+            //Si el valor de contaminación recibido supera el umbral, se genera una notificacion
+            if(valorbeacondoubleAux > 0.3){
+                createNotificationChannel();
+                createNotification("Límite de calidad del aire excedido en (" + latitud+ ", " + longitud + ")", 1);
+            }
+            /*Mail m = new Mail("trackerpollutiongti@gmail.com", "liba fqga fujp kfaj");
+
+            EditText campo_correo = (EditText) findViewById(R.id.correo);
+            EditText campo_asunto = (EditText) findViewById(R.id.asunto);
+            EditText campo_motivo = (EditText) findViewById(R.id.motivo);
+            String correo = campo_correo.getText().toString();
+            String motivo = campo_motivo.getText().toString();
+            String asunto = campo_asunto.getText().toString();
+
+            String[] toArr = {"trackerpollutiongti@gmail.com"};
+            m.setTo(toArr);
+            m.setFrom("trackerpollutiongti@gmail.com");
+            m.setSubject(asunto);
+            m.setBody(correo, motivo);
+            Log.d("MailApp", "Estoy dentro del mensaje");
+
+            try {
+                Log.d("MailApp", "Estoy dentro del try");
+                if(m.send()) {
+                    UserArea.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(UserArea.this, "El correo ha sido enviado satisfactoreamente", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    UserArea.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(UserArea.this, "Error al mandar el correo: hay campos vacíos", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            } catch(Exception e) {
+                Log.e("MailApp", "Could not send email", e);
+            }*/
+            return null;
+        }
+
+
+
+
+    }
 
 
 }
+
+
