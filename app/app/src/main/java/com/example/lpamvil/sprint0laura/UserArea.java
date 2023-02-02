@@ -72,6 +72,7 @@ public class UserArea extends AppCompatActivity {
     boolean detectado = false;
     long tiempo_inicial = 0;
     ImageButton botonmenu_userarea;
+    Button prueba;
 
     boolean menudesplegado=false;
 
@@ -159,10 +160,12 @@ public class UserArea extends AppCompatActivity {
         valorbeacondoubleAux = abs(valorbeacondouble/1000);
 
         //Si el valor de contaminación recibido supera el umbral, se genera una notificacion
-        if(valorbeacondoubleAux > 0.3){
-            createNotificationChannel();
-            createNotification("Límite de calidad del aire excedido en (" + latitud+ ", " + longitud + ")", 1);
-        }
+        //if(valorbeacondoubleAux > 0.3){
+            //createNotificationChannel();
+            //createNotification("Límite de calidad del aire excedido en (" + latitud+ ", " + longitud + ")", 1);
+
+        //}
+
         valorbeaconDoubleMotrar = String.valueOf(valorbeacondoubleAux);
         tiposensor.setText(preferencias.getString("tiposensor","") + ": " + valorbeaconDoubleMotrar);
         int idSensor = Integer.parseInt(preferencias.getString("idSensor","prueba"));
@@ -432,6 +435,16 @@ public class UserArea extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button enviar_correo = (Button) findViewById(R.id.prueba);
+        enviar_correo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new UserArea.CorreoSegundoPlano().execute(); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
+            }
+        });
+
+
         Log.d("--", " onCreate(): empieza ");
 
 
@@ -697,10 +710,20 @@ public class UserArea extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... variableNoUsada) {
             //Si el valor de contaminación recibido supera el umbral, se genera una notificacion
-            if(valorbeacondoubleAux > 0.3){
+            /*     if(valorbeacondoubleAux > 0.3){
                 createNotificationChannel();
+
                 createNotification("Límite de calidad del aire excedido en (" + latitud+ ", " + longitud + ")", 1);
+            }*/
+
+            Log.d("ivan", "pepinillo");
+            int j = 0;
+            while(j==0){
+
+                Log.d("holaaa", String.valueOf(valorbeacondoubleAux));
+
             }
+
             /*Mail m = new Mail("trackerpollutiongti@gmail.com", "liba fqga fujp kfaj");
 
             EditText campo_correo = (EditText) findViewById(R.id.correo);
